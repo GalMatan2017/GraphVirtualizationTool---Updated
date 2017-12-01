@@ -14,10 +14,10 @@ namespace GraphVirtualizationTool
             get { return _nodes ?? (_nodes = new ObservableCollection<Node>()); }
         }
 
-        private ObservableCollection<Connector> _connectors;
-        public ObservableCollection<Connector> Connectors
+        private ObservableCollection<Edge> _edges;
+        public ObservableCollection<Edge> Edges
         {
-            get { return _connectors ?? (_connectors = new ObservableCollection<Connector>()); }
+            get { return _edges ?? (_edges = new ObservableCollection<Edge>()); }
         }
 
         #endregion
@@ -42,7 +42,7 @@ namespace GraphVirtualizationTool
         public MainViewModel()
         {
             _nodes = new ObservableCollection<Node>(NodesDataSource.GetRandomNodes());
-            _connectors = new ObservableCollection<Connector>(NodesDataSource.GetRandomConnectors(Nodes.ToList()));
+            _edges = new ObservableCollection<Edge>(NodesDataSource.GetRandomConnectors(Nodes.ToList()));
             CreateNewNode();
         }
 
@@ -103,9 +103,9 @@ namespace GraphVirtualizationTool
 
         public void CreateNewConnector()
         {
-            var connector = new Connector()
+            var edge = new Edge()
                                 {
-                                    Name = "Connector" + (Connectors.Count + 1),
+                                    Name = "Connector" + (Edges.Count + 1),
                                 };
 
             //Connectors.Add(connector);
@@ -136,7 +136,7 @@ namespace GraphVirtualizationTool
                 OnPropertyChanged("AreaWidth");
             }
         }
-
+       
         #endregion
     }
 }

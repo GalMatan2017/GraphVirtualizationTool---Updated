@@ -1,0 +1,48 @@
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\bin\Debug\NodesEditor.exe
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\bin\Debug\NodesEditor.pdb
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\NodesEditor.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\Left Edition Panel\ButtonsPanel.baml
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\Left Edition Panel\ParametersEditor.baml
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\Left Edition Panel\ConnectorPropertyEditor.baml
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\Left Edition Panel\EditorStyles.baml
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\Left Edition Panel\NodePropertyEditor.baml
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\App.baml
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\Left Edition Panel\ButtonsPanel.g.cs
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\Left Edition Panel\ParametersEditor.g.cs
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\MainWindow.g.cs
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\Left Edition Panel\ConnectorPropertyEditor.g.cs
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\Left Edition Panel\NodePropertyEditor.g.cs
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\App.g.cs
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\NodesEditor_MarkupCompile.cache
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\NodesEditor_MarkupCompile.lref
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\MainWindow.baml
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\NodesEditor.g.resources
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\NodesEditor.Properties.Resources.resources
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\NodesEditor.csproj.GenerateResource.Cache
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\NodesEditor.exe
+C:\Users\User\Desktop\New folder (2)\WPFSamples-8867a063f96f3d407b884d7a7f7c168c47d243e2\NodesEditor\obj\x86\Debug\NodesEditor.pdb
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\NodesEditor.exe
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\NodesEditor.pdb
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\bin\Debug\NodesEditor.exe
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\bin\Debug\NodesEditor.pdb
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\NodesEditor.csprojResolveAssemblyReference.cache
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\Left Edition Panel\ButtonsPanel.baml
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\Left Edition Panel\ParametersEditor.baml
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\Left Edition Panel\ConnectorPropertyEditor.baml
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\Left Edition Panel\EditorStyles.baml
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\Left Edition Panel\NodePropertyEditor.baml
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\App.baml
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\Left Edition Panel\ButtonsPanel.g.cs
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\Left Edition Panel\ParametersEditor.g.cs
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\MainWindow.g.cs
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\Left Edition Panel\ConnectorPropertyEditor.g.cs
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\Left Edition Panel\NodePropertyEditor.g.cs
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\App.g.cs
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\NodesEditor_MarkupCompile.cache
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\NodesEditor_MarkupCompile.lref
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\MainWindow.baml
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\NodesEditor.g.resources
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\NodesEditor.Properties.Resources.resources
+C:\Users\User\Documents\visual studio 2015\Projects\NodesEditor\obj\x86\Debug\NodesEditor.csproj.GenerateResource.Cache

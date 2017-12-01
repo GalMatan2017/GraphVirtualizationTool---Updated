@@ -4,15 +4,20 @@
         xmlns:local="clr-namespace:GraphVirtualizationTool"
         Title="Window1" Height="800" Width="800" x:Name="view">
     <DockPanel>
-        <StackPanel Width="150" DockPanel.Dock="Left" Margin="5,0,0,0">
-            <!--MENU-->
-        </StackPanel>
         
+        <Grid Width="150" DockPanel.Dock="Left" Margin="5,0,0,0.5" Height="772" VerticalAlignment="Bottom">
+            <!--MENU-->
+            <local:GraphController Margin="0,274,0,-274"  />
+           
+  
+            <!--MENU-->
+        </Grid>
+
         <Grid Margin="10">
             <Grid.Resources>
                 <!-- This CompositeCollection basically Concatenates the Nodes and Connectors in a single one -->
                 <CompositeCollection x:Key="Col">
-                    <CollectionContainer Collection="{Binding DataContext.Connectors,Source={x:Reference view}}"/>
+                    <CollectionContainer Collection="{Binding DataContext.Edges,Source={x:Reference view}}"/>
                     <CollectionContainer Collection="{Binding DataContext.Nodes,Source={x:Reference view}}"/>
                 </CompositeCollection>
                 <!-- This is the DataTemplate that will be used to render the Node class -->
@@ -25,13 +30,13 @@
                 </DataTemplate>
 
                 <!-- This is the DataTemplate that will be used to render the Connector class -->
-                <DataTemplate DataType="{x:Type local:Connector}">
+                <DataTemplate DataType="{x:Type local:Edge}">
                     <Line Stroke="Blue" StrokeThickness="3"
                             X1="{Binding Start.X}" Y1="{Binding Start.Y}"
                             X2="{Binding End.X}" Y2="{Binding End.Y}" x:Name="Line"/>
                 </DataTemplate>
             </Grid.Resources>
-            
+
             <ListBox ItemsSource="{StaticResource ResourceKey = Col }">
                 <ListBox.Template>
                     <ControlTemplate>

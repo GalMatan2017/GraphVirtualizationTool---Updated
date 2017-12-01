@@ -13,5 +13,7 @@ namespace GraphVirtualizationTool
             InitializeComponent();
             DataContext = new MainViewModel();
         }
+
+      
     }
 }
