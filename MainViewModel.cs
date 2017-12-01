@@ -8,6 +8,8 @@ namespace GraphVirtualizationTool
     public class MainViewModel: INotifyPropertyChanged
     {
         #region Collections
+        private List<Node> listofnodes = new List<Node>();
+
         private ObservableCollection<Node> _nodes;
         public ObservableCollection<Node> Nodes
         {
@@ -18,6 +20,35 @@ namespace GraphVirtualizationTool
         public ObservableCollection<Edge> Edges
         {
             get { return _edges ?? (_edges = new ObservableCollection<Edge>()); }
+        }
+        private DiagramObject _selectedObject;
+
+        public DiagramObject SelectedObject
+        {
+            get
+            {
+                return _selectedObject;
+            }
+            set
+            {
+                Nodes.ToList().ForEach(x => x.IsHighlighted = false);
+
+                _selectedObject = value;
+                OnPropertyChanged("SelectedObject");
+
+                //DeleteCommand.IsEnabled = value != null;
+
+                var connector = value as Edge;
+                if (connector != null)
+                {
+                    if (connector.Start != null)
+                        connector.Start.IsHighlighted = true;
+
+                    if (connector.End != null)
+                        connector.End.IsHighlighted = true;
+                }
+
+            }
         }
 
         #endregion
@@ -41,7 +72,9 @@ namespace GraphVirtualizationTool
 
         public MainViewModel()
         {
-            _nodes = new ObservableCollection<Node>(NodesDataSource.GetRandomNodes());
+            _nodes = new ObservableCollection<Node>(NodesDataSource.setNodes(listofnodes));
+
+           // _nodes = new ObservableCollection<Node>(NodesDataSource.GetRandomNodes());
             _edges = new ObservableCollection<Edge>(NodesDataSource.GetRandomConnectors(Nodes.ToList()));
             CreateNewNode();
         }

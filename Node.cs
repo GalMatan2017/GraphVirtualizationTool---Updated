@@ -28,5 +28,18 @@ namespace GraphVirtualizationTool
                 OnPropertyChanged("Y");
             }
         }
+        private bool _isHighlighted { get; set; }
+        public bool IsHighlighted
+        {
+            get
+            {
+                return _isHighlighted;
+            }
+            set
+            {
+                _isHighlighted = value;
+                OnPropertyChanged("IsHighlighted");
+            }
+        }
     }
 }

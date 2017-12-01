@@ -15,15 +15,23 @@ namespace GraphVirtualizationTool
             return new Node
                 {
                     Name = "Node" + random.Next(0,100), //node id between 0 - 100
-                    X = random.Next(50, 500), //position x axis
-
-                    Y = random.Next(50,500) //position y axis
+                    X = random.Next(50, 1000), //position x axis
+                    Y = random.Next(50,1000) //position y axis
             }; 
             
         }
         public static IEnumerable<Node> GetRandomNodes()
         {
-            return Enumerable.Range(2, 2).Select(x => GetRandomNode());
+            return Enumerable.Range(500, 500).Select(x => GetRandomNode());
+        }
+
+        internal static List<Node> setNodes(List<Node> listofnodes)
+        {
+            for (int i=0; i<50;i++)
+            listofnodes.Add(GetRandomNode());
+            
+            return listofnodes;
+
         }
 
         public static Edge GetRandomConnector(IEnumerable<Node> nodes)
