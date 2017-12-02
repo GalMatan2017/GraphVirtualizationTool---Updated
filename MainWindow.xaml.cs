@@ -15,8 +15,15 @@ namespace GraphVirtualizationTool
 
         public MainWindow()
         {
+
+            //-------------------globalflag-----------------//
+            GraphGlobalVariables.graphTypeFlag = 1;
+            //-------------------globalflag-----------------//
+
+
             InitializeComponent();
             DataContext = new MainViewModel();
+
         }
 
         private void Thumb_Drag(object sender, DragDeltaEventArgs e)

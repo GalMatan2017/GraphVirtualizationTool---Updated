@@ -20,7 +20,7 @@ namespace GraphVirtualizationTool
                 Name = "" + nodeIndex++,
                     X = random.Next(50, 1024), //position x axis // draw area can be change depends on the number of nodes
                     Y = random.Next(50,768) //position y axis //draw area can be change depends on the number of nodes
-            }; 
+            };
             
         }
         public static IEnumerable<Node> GetRandomNodes()

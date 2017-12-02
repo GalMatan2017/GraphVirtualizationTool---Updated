@@ -7,7 +7,7 @@
         
         <Grid Width="150" DockPanel.Dock="Left" Margin="5,0,0,0.5" Height="772" VerticalAlignment="Bottom">
             <!--MENU-->
-            <local:GraphController Margin="0,274,0,-274"  />
+            <local:GraphController Margin="0,111,0,211"  />
             <!--MENU-->
         </Grid>
 

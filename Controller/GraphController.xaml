@@ -3,32 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d" d:DesignWidth="300" Height="449.63">
     <UserControl.Resources>
         <ResourceDictionary Source="EditorStyles.xaml"/>
     </UserControl.Resources>
-         <StackPanel>
-                <Button Click="onOpenFileClickButton" Background="White">
-                 <TextBlock FontSize="30" ><Run Text="Open File"/></TextBlock>
-                 </Button>
+    <StackPanel>
+        <Button Click="onOpenFileClickButton" Background="White">
+            <TextBlock FontSize="30" ><Run Text="Open File"/></TextBlock>
+        </Button>
 
-                <TextBlock x:Name="filenamepath" TextWrapping="Wrap" Margin="78,0" Text="{Binding Graphfile.FileName}"></TextBlock> 
-                <TextBlock x:Name="textBlock_Copy1" TextWrapping="Wrap" Text="TextBlock" Width="144"/>
-            
-                <TextBlock x:Name="textBlock_Copy2" TextWrapping="Wrap" Text="TextBlock" Width="144"/>
-            
-                <TextBlock x:Name="textBlock_Copy3" TextWrapping="Wrap" Text="TextBlock" Width="144"/>
-           
-                <TextBlock x:Name="textBlock_Copy4" TextWrapping="Wrap" Text="TextBlock" Width="144"/>
-            
-                <TextBlock x:Name="textBlock_Copy5" TextWrapping="Wrap" Text="TextBlock" Width="144"/>
-            
-                <TextBlock x:Name="textBlock_Copy6" TextWrapping="Wrap" Text="TextBlock" Width="144"/>
-           
-                <TextBlock x:Name="textBlock_Copy7" TextWrapping="Wrap" Text="TextBlock" Width="144"/>
-          
-                <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Text="TextBlock" Width="144"/>
-          
-         </StackPanel>
+        <TextBlock Name="fileName" FontSize="15" Text="{Binding textdata}" ></TextBlock>
+        <TextBlock Name="graphType" FontSize="15" Text="{Binding textdata}" ></TextBlock>
+
+
+    </StackPanel>
 </UserControl>

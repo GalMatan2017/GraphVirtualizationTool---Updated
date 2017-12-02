@@ -8,8 +8,8 @@
     <ProjectGuid>{E049DBCF-D965-4C89-A978-8229159DFA64}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NodesEditor</RootNamespace>
-    <AssemblyName>NodesEditor</AssemblyName>
+    <RootNamespace>GraphVirtualizationTool</RootNamespace>
+    <AssemblyName>GraphVirtualizationTool</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -74,6 +74,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="TextboxText.cs" />
     <Page Include="Controller\EditorStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -96,7 +97,8 @@
     </Compile>
     <Compile Include="DiagramObject.cs" />
     <Compile Include="GraphFile.cs" />
-    <Compile Include="MainViewModel.cs" />
+    <Compile Include="Model\LeftPanelViewModel.cs" />
+    <Compile Include="Model\MainViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
