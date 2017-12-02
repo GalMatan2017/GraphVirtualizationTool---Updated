@@ -8,12 +8,27 @@
     <UserControl.Resources>
         <ResourceDictionary Source="EditorStyles.xaml"/>
     </UserControl.Resources>
-    <StackPanel>
-        <Button Click="onOpenFileClickButton" Background="White">
-            <TextBlock FontSize="30" ><Run Text="Open File"/></TextBlock>
-        </Button>
-        
-      
-        
-    </StackPanel>
+         <StackPanel>
+                <Button Click="onOpenFileClickButton" Background="White">
+                 <TextBlock FontSize="30" ><Run Text="Open File"/></TextBlock>
+                 </Button>
+
+                <TextBlock x:Name="filenamepath" TextWrapping="Wrap" Margin="78,0" Text="{Binding Graphfile.FileName}"></TextBlock> 
+                <TextBlock x:Name="textBlock_Copy1" TextWrapping="Wrap" Text="TextBlock" Width="144"/>
+            
+                <TextBlock x:Name="textBlock_Copy2" TextWrapping="Wrap" Text="TextBlock" Width="144"/>
+            
+                <TextBlock x:Name="textBlock_Copy3" TextWrapping="Wrap" Text="TextBlock" Width="144"/>
+           
+                <TextBlock x:Name="textBlock_Copy4" TextWrapping="Wrap" Text="TextBlock" Width="144"/>
+            
+                <TextBlock x:Name="textBlock_Copy5" TextWrapping="Wrap" Text="TextBlock" Width="144"/>
+            
+                <TextBlock x:Name="textBlock_Copy6" TextWrapping="Wrap" Text="TextBlock" Width="144"/>
+           
+                <TextBlock x:Name="textBlock_Copy7" TextWrapping="Wrap" Text="TextBlock" Width="144"/>
+          
+                <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Text="TextBlock" Width="144"/>
+          
+         </StackPanel>
 </UserControl>

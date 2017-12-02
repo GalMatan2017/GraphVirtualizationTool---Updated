@@ -56,10 +56,10 @@ namespace GraphVirtualizationTool
                 if (node == null)
                     return;
 
-                var connector = vm.SelectedObject as Edge;
+                var edge = vm.SelectedObject as Edge;
 
-                if (connector.Start != null && node != connector.Start)
-                    connector.End = node;
+                if (edge.Start != null && node != edge.Start)
+                    edge.End = node;
             }
         }
 

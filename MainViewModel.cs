@@ -9,7 +9,7 @@ namespace GraphVirtualizationTool
     {
         #region Collections
         private List<Node> listofnodes = new List<Node>();
-
+        
         private ObservableCollection<Node> _nodes;
         public ObservableCollection<Node> Nodes
         {
@@ -77,6 +77,7 @@ namespace GraphVirtualizationTool
            // _nodes = new ObservableCollection<Node>(NodesDataSource.GetRandomNodes());
             _edges = new ObservableCollection<Edge>(NodesDataSource.GetRandomConnectors(Nodes.ToList()));
             CreateNewNode();
+            ShowNames = true;
         }
 
         #endregion
@@ -148,7 +149,7 @@ namespace GraphVirtualizationTool
 
         #region Scrolling support
 
-        private double _areaHeight = 500;
+        private double _areaHeight = 768;
         public double AreaHeight
         {
             get { return _areaHeight; }
@@ -159,7 +160,7 @@ namespace GraphVirtualizationTool
             }
         }
 
-        private double _areaWidth = 500;
+        private double _areaWidth = 1024;
         public double AreaWidth
         {
             get { return _areaWidth; }

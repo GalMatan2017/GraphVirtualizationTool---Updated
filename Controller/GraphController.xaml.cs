@@ -18,7 +18,7 @@ namespace GraphVirtualizationTool
             openFileDialog.Filter = "Text files (*.txt)|*.txt";
             if (openFileDialog.ShowDialog() == true)
             {
-                GraphFile.FileName  = openFileDialog.FileName;
+               string FileName  = openFileDialog.FileName;
             }
         }
     
