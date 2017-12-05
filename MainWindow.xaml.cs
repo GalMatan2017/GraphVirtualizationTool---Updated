@@ -40,7 +40,7 @@ namespace GraphVirtualizationTool
             node.Y += e.VerticalChange;
         }
 
-        private void ListBox_PreviewMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+       private void ListBox_PreviewMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
             var listbox = sender as ListBox;
 

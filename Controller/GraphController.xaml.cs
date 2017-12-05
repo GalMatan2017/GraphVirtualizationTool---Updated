@@ -13,7 +13,7 @@ namespace GraphVirtualizationTool
         {
             InitializeComponent();
             if (GraphGlobalVariables.graphTypeFlag == 1) {
-                graphType.DataContext = new TextboxText() { textdata = "Bipartite Graph!" };
+                graphType.DataContext = new TextBlockText() { textdata = "Bipartite Graph!" };
             }
         }
 
@@ -27,7 +27,7 @@ namespace GraphVirtualizationTool
             {
                 GraphGlobalVariables.FileNamePath = openFileDialog.FileName;
                 GraphGlobalVariables.FileName = Path.GetFileName(GraphGlobalVariables.FileNamePath);
-                fileName.DataContext = new TextboxText() { textdata = Path.GetFileName(openFileDialog.FileName) };
+                fileName.DataContext = new TextBlockText() { textdata = Path.GetFileName(openFileDialog.FileName) };
 
             }
         }
