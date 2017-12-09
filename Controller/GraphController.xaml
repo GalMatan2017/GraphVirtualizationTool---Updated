@@ -7,7 +7,7 @@
     <UserControl.Resources>
         <ResourceDictionary Source="EditorStyles.xaml"/>
     </UserControl.Resources>
-    <StackPanel>
+    <StackPanel >
         <Button Click="onOpenFileClickButton" Background="White">
             <TextBlock FontSize="30" ><Run Text="Open File"/></TextBlock>
         </Button>
