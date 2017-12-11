@@ -2,14 +2,14 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:GraphVirtualizationTool"
-        Title="Window1" Height="768" Width="1024" x:Name="view" MinHeight="400" MinWidth="600">
-    <DockPanel >
+        Title="Window1" Height="768" Width="1024" x:Name="view">
+    <DockPanel>
         
-        <StackPanel Width="150" DockPanel.Dock="Left" Margin="5,0,0,0.5" Height="772" VerticalAlignment="Stretch">
+        <Grid Width="150" DockPanel.Dock="Left" Margin="5,0,0,0.5" Height="772" VerticalAlignment="Bottom">
             <!--MENU-->
             <local:GraphController Margin="0,111,0,211"  />
             <!--MENU-->
-        </StackPanel>
+        </Grid>
 
 
 

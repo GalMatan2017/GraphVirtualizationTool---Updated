@@ -18,7 +18,7 @@ namespace GraphVirtualizationTool
         }
 
 
-        private void onOpenFileClickButton(object sender, System.Windows.RoutedEventArgs e)
+        private void onOpenMatrixFileClickButton(object sender, System.Windows.RoutedEventArgs e)
         {
                 Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
                 openFileDialog.Filter = "Text files (*.txt)|*.txt";
@@ -31,7 +31,21 @@ namespace GraphVirtualizationTool
 
             }
         }
-        
-    
+
+
+        private void onOpenListFileClickButton(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            openFileDialog.Filter = "Text files (*.txt)|*.txt";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                GraphGlobalVariables.FileNamePath = openFileDialog.FileName;
+                GraphGlobalVariables.FileName = Path.GetFileName(GraphGlobalVariables.FileNamePath);
+                fileName.DataContext = new TextBlockText() { textdata = Path.GetFileName(openFileDialog.FileName) };
+
+            }
+        }
+
     }
 }

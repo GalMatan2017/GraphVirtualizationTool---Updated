@@ -7,9 +7,12 @@
     <UserControl.Resources>
         <ResourceDictionary Source="EditorStyles.xaml"/>
     </UserControl.Resources>
-    <StackPanel >
-        <Button Click="onOpenFileClickButton" Background="White">
-            <TextBlock FontSize="30" ><Run Text="Open File"/></TextBlock>
+    <StackPanel>
+        <Button Click="onOpenMatrixFileClickButton" Background="White">
+            <TextBlock  TextWrapping="Wrap"  FontSize="30" ><Run Text="Insert Ajacency Matrix"/></TextBlock>
+        </Button>
+        <Button Click="onOpenListFileClickButton" Background="White">
+            <TextBlock TextWrapping="Wrap" FontSize="30" ><Run Text="Insert Ajacency List"/></TextBlock>
         </Button>
 
         <TextBlock Name="fileName" FontSize="15" Text="{Binding textdata}" ></TextBlock>
