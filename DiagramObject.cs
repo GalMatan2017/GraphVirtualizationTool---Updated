@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace GraphVirtualizationTool
 {
-    public abstract class DiagramObject:INotifyPropertyChanged
+    public abstract class DiagramObject : INotifyPropertyChanged
     {
         private string _name;
         public string Name
@@ -16,16 +16,28 @@ namespace GraphVirtualizationTool
             }
         }
 
-        public abstract double X {get;set;}
+        private bool _isNew;
+        public bool IsNew
+        {
+            get { return _isNew; }
+            set
+            {
+                _isNew = value;
+                OnPropertyChanged("IsNew");
+            }
+        }
 
-        public abstract double Y {get;set;}
+        public abstract double X { get; set; }
+
+        public abstract double Y { get; set; }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -8,16 +8,47 @@ namespace GraphVirtualizationTool
     public class MainViewModel: INotifyPropertyChanged
     {
         #region Collections
+        private List<Node> listofnodes = new List<Node>();
+        
         private ObservableCollection<Node> _nodes;
         public ObservableCollection<Node> Nodes
         {
             get { return _nodes ?? (_nodes = new ObservableCollection<Node>()); }
         }
 
-        private ObservableCollection<Connector> _connectors;
-        public ObservableCollection<Connector> Connectors
+        private ObservableCollection<Edge> _edges;
+        public ObservableCollection<Edge> Edges
         {
-            get { return _connectors ?? (_connectors = new ObservableCollection<Connector>()); }
+            get { return _edges ?? (_edges = new ObservableCollection<Edge>()); }
+        }
+        private DiagramObject _selectedObject;
+
+        public DiagramObject SelectedObject
+        {
+            get
+            {
+                return _selectedObject;
+            }
+            set
+            {
+                Nodes.ToList().ForEach(x => x.IsHighlighted = false);
+
+                _selectedObject = value;
+                OnPropertyChanged("SelectedObject");
+
+                //DeleteCommand.IsEnabled = value != null;
+
+                var connector = value as Edge;
+                if (connector != null)
+                {
+                    if (connector.Start != null)
+                        connector.Start.IsHighlighted = true;
+
+                    if (connector.End != null)
+                        connector.End.IsHighlighted = true;
+                }
+
+            }
         }
 
         #endregion
@@ -41,9 +72,12 @@ namespace GraphVirtualizationTool
 
         public MainViewModel()
         {
-            _nodes = new ObservableCollection<Node>(NodesDataSource.GetRandomNodes());
-            _connectors = new ObservableCollection<Connector>(NodesDataSource.GetRandomConnectors(Nodes.ToList()));
+            _nodes = new ObservableCollection<Node>(NodesDataSource.setNodes(listofnodes));
+
+           // _nodes = new ObservableCollection<Node>(NodesDataSource.GetRandomNodes());
+            _edges = new ObservableCollection<Edge>(NodesDataSource.GetRandomConnectors(Nodes.ToList()));
             CreateNewNode();
+            ShowNames = true;
         }
 
         #endregion
@@ -103,9 +137,9 @@ namespace GraphVirtualizationTool
 
         public void CreateNewConnector()
         {
-            var connector = new Connector()
+            var edge = new Edge()
                                 {
-                                    Name = "Connector" + (Connectors.Count + 1),
+                                    Name = "Connector" + (Edges.Count + 1),
                                 };
 
             //Connectors.Add(connector);
@@ -115,7 +149,7 @@ namespace GraphVirtualizationTool
 
         #region Scrolling support
 
-        private double _areaHeight = 500;
+        private double _areaHeight = 768;
         public double AreaHeight
         {
             get { return _areaHeight; }
@@ -126,7 +160,7 @@ namespace GraphVirtualizationTool
             }
         }
 
-        private double _areaWidth = 500;
+        private double _areaWidth = 1024;
         public double AreaWidth
         {
             get { return _areaWidth; }
@@ -136,7 +170,7 @@ namespace GraphVirtualizationTool
                 OnPropertyChanged("AreaWidth");
             }
         }
-
+       
         #endregion
     }
 }
