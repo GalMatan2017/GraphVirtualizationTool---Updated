@@ -8,10 +8,7 @@ namespace GraphVirtualizationTool
 {
     public class LeftPanelViewModel : INotifyPropertyChanged
     {
-
-      
         private string _fileName;
-
         public string FileName
         {
             get
@@ -23,11 +20,8 @@ namespace GraphVirtualizationTool
                 _fileName = value;
                 OnPropertyChanged("FileName");
             }
-
         }
-
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
