@@ -10,52 +10,62 @@ namespace GraphVirtualizationTool.Model
     {
         public List<List<int>> ParseFile(string filename)
         {
-            //return value
-            List<List<int>> list = new List<List<int>>();
-
-            //open file
-            StreamReader reader = File.OpenText(filename);
-
-            string line;
-            int columns = 0,
-                rows = 0;
-
-            //read line
-            while ((line = reader.ReadLine()) != null)
+            try
             {
-                //split by comma
-                string[] items = line.Split(':',',');
-                ++rows;
-                if (!(items.Length > 1))
-                    throw new Exception($"Row {rows} is corrupted!");
-                //convert to integers
-                int[] convertedItems = Array.ConvertAll(items, int.Parse);
+                //return value
+                List<List<int>> list = new List<List<int>>();
 
-                if (rows == 1)
+                //open file
+                StreamReader reader = File.OpenText(filename);
+
+                string line;
+                int columns = 0,
+                    rows = 0;
+
+                //read line
+                while ((line = reader.ReadLine()) != null)
                 {
-                    list.Add(convertedItems.ToList());
-                    //columns constant integer is initiliazed
-                    columns = convertedItems.Length;
+                    //split by comma
+                    string[] items = line.Split(':', ',');
+                    ++rows;
+                    if (!(items.Length > 1))
+                        throw new Exception($"Row {rows} is corrupted!");
+                    //convert to integers
+                    int[] convertedItems = Array.ConvertAll(items, int.Parse);
+
+                    if (rows == 1)
+                    {
+                        list.Add(convertedItems.ToList());
+                        //columns constant integer is initiliazed
+                        columns = convertedItems.Length;
+                    }
+                    else if (convertedItems.Length == columns)
+                    {
+                        list.Add(convertedItems.ToList());
+                    }
+                    else
+                    {
+                        throw new Exception($"Row #{rows} is corrupted!");
+                    }
                 }
-                else if (convertedItems.Length == columns)
+
+                if (columns != rows)
                 {
-                    list.Add(convertedItems.ToList());
+                    if (rows < columns)
+                        throw new Exception("columns is bigger than rows");
+                    else
+                        throw new Exception("rows is bigger than columns");
                 }
-                else
-                {
-                    throw new Exception($"Row #{rows} is corrupted!");
-                }
+
+                return list;
             }
 
-            if (columns != rows)
+            catch (Exception ex)
             {
-                if (rows < columns)
-                    throw new Exception("columns is bigger than rows");
-                else
-                    throw new Exception("rows is bigger than columns");
-            }
+                Console.WriteLine(ex.Message);
+                return new List<List<int>>(); ;
 
-            return list;
+            }
         }
 
         public Tuple<IEnumerable<Node>, IEnumerable<Edge>> readGraph(List<List<int>> adjList)

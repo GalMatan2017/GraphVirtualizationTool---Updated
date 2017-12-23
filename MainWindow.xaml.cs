@@ -72,8 +72,6 @@ namespace GraphVirtualizationTool
             var vm = DataContext as MainViewModel;
             if (vm != null)
             {
-                if (vm.CreatingNewConnector)
-                {
                     var node = GetNodeUnderMouse();
                     var connector = vm.SelectedObject as Edge;
                     if (node != null && connector != null && connector.Start == null)
@@ -83,13 +81,9 @@ namespace GraphVirtualizationTool
                         e.Handled = true;
                         return;
                     }
-                }
 
                 if (vm.SelectedObject != null)
                     vm.SelectedObject.IsNew = false;
-
-               // vm.CreatingNewNode = false;
-                vm.CreatingNewConnector = false;
             }
         }
 

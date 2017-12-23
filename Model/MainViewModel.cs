@@ -2,17 +2,13 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace GraphVirtualizationTool
 {
     public class MainViewModel: INotifyPropertyChanged
     {
         private MainViewModel() {
-
-            AdjacencyMatrix am = new AdjacencyMatrix();
-
-           // _nodes = new ObservableCollection<Node>(NodesDataSource.GetRandomNodes());
-           //  _edges = new ObservableCollection<Edge>(NodesDataSource.GetRandomConnectors(Nodes.ToList()));
 
             ShowNames = true;
 
@@ -51,7 +47,10 @@ namespace GraphVirtualizationTool
             set
             {
                 if (value != null)
+                {
                     _edges = value;
+                    OnPropertyChanged("Edges");
+                }
             }
         }
         private DiagramObject _selectedObject;
@@ -101,20 +100,6 @@ namespace GraphVirtualizationTool
 
         #endregion
 
-        #region Constructor
-
-        //public MainViewModel()
-        //{
-        //    //_nodes = new ObservableCollection<Node>(NodesDataSource.setNodes(listofnodes));
-
-        //   // _nodes = new ObservableCollection<Node>(NodesDataSource.GetRandomNodes());
-        //   // _edges = new ObservableCollection<Edge>(NodesDataSource.GetRandomConnectors(Nodes.ToList()));
-
-        //    ShowNames = true;
-        //}
-
-        #endregion
-
         #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -126,59 +111,6 @@ namespace GraphVirtualizationTool
 
         #endregion
 
-        #region Creating New Objects
-        
-        //private bool _creatingNewNode;
-        //public bool CreatingNewNode
-        //{
-        //    get { return _creatingNewNode; }
-        //    set
-        //    {
-        //        _creatingNewNode = value;
-        //        OnPropertyChanged("CreatingNewNode");
-
-        //        if (value)
-        //            for (int i = 0; i < 10; i++)
-        //                CreateNewNode();
-        //    }
-        //}
-
-        public void CreateNewNode()
-        {
-            var newnode = new Node()
-                              {
-                                  Name = ""+(Nodes.Count + 1),
-                              };
-
-            Nodes.Add(newnode);
-        }
-
-
-        private bool _creatingNewConnector;
-        public bool CreatingNewConnector
-        {
-            get { return _creatingNewConnector; }
-            set
-            {
-                _creatingNewConnector = value;
-                OnPropertyChanged("CreatingNewConnector");
-
-                if (value) { }
-                    CreateNewConnector();
-            }
-        }
-
-        public void CreateNewConnector()
-        {
-            var edge = new Edge()
-                                {
-                                    Name = "Connector" + (Edges.Count + 1),
-                                };
-
-            //Connectors.Add(connector);
-        }
-
-        #endregion
 
         #region Scrolling support
 

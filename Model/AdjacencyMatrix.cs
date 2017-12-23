@@ -9,52 +9,62 @@ namespace GraphVirtualizationTool
     {
         public List<List<int>> ParseFile(string filename)
         {
-            List<List<int>> matrix = new List<List<int>>();
-
-            StreamReader reader = File.OpenText(filename);
-
-            string line;
-            int columns = 0,
-                rows = 0;
-
-            //read line
-            while ((line = reader.ReadLine()) != null)
+            try
             {
-                //split by whitespace
-                string[] items = line.Split(',');
-                ++rows;
-                if (!(items.Length > 1))
-                    throw new Exception($"Row {rows} is corrupted!");
-                //convert to integers
-                int[] convertedItems = Array.ConvertAll(items, int.Parse);
-                foreach (var item in convertedItems)
-                    if (item != 0 && item != 1)
-                        throw new Exception($"Found illegal character at row {rows}");
-                if (rows == 1)
-                {
-                    matrix.Add(convertedItems.ToList());
-                    //columns constant integer is initiliazed
-                    columns = convertedItems.Length;
-                }
-                else if (convertedItems.Length == columns)
-                {
-                    matrix.Add(convertedItems.ToList());
-                }
-                else
-                {
-                    throw new Exception($"Row #{rows} is corrupted!");
-                }
-            }
+                List<List<int>> matrix = new List<List<int>>();
 
-            if (columns != rows)
+                StreamReader reader = File.OpenText(filename);
+
+                string line;
+                int columns = 0,
+                    rows = 0;
+
+                //read line
+                while ((line = reader.ReadLine()) != null)
+                {
+                    //split by whitespace
+                    string[] items = line.Split(',');
+                    ++rows;
+                    if (!(items.Length > 1))
+                        throw new Exception($"Row {rows} is corrupted!");
+                    //convert to integers
+                    int[] convertedItems = Array.ConvertAll(items, int.Parse);
+                    foreach (var item in convertedItems)
+                        if (item != 0 && item != 1)
+                            throw new Exception($"Found illegal character at row {rows}");
+                    if (rows == 1)
+                    {
+                        matrix.Add(convertedItems.ToList());
+                        //columns constant integer is initiliazed
+                        columns = convertedItems.Length;
+                    }
+                    else if (convertedItems.Length == columns)
+                    {
+                        matrix.Add(convertedItems.ToList());
+                    }
+                    else
+                    {
+                        throw new Exception($"Row #{rows} is corrupted!");
+                    }
+
+                }
+
+                if (columns != rows)
+                {
+                    if (rows < columns)
+                        throw new Exception("columns is bigger than rows");
+                    else
+                        throw new Exception("rows is bigger than columns");
+                }
+
+                return matrix;
+            }
+            catch (Exception ex)
             {
-                if (rows < columns)
-                    throw new Exception("columns is bigger than rows");
-                else
-                    throw new Exception("rows is bigger than columns");
-            }
+                Console.WriteLine(ex.Message);
+                return new List<List<int>>(); ;
 
-            return matrix;
+            }
         }
 
         public Tuple<IEnumerable<Node>, IEnumerable<Edge>> readMatrix(List<List<int>> matrix)
