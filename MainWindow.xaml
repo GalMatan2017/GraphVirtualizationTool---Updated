@@ -5,7 +5,7 @@
         Title="Window1" Height="768" Width="1024" x:Name="view">
     <DockPanel>
         
-        <Grid Width="150" DockPanel.Dock="Left" Margin="5,0,0,0.5" Height="772" VerticalAlignment="Bottom">
+        <Grid Width="150" DockPanel.Dock="Left" Margin="5,0,0,0.5" Height="772" VerticalAlignment="Stretch">
             <!--MENU-->
             <local:GraphController Margin="0,111,0,211"  />
             <!--MENU-->
