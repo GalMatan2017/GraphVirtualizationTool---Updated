@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Controls;
+using GraphVirtualizationTool.Model;
 
 namespace GraphVirtualizationTool
 {
@@ -16,7 +16,7 @@ namespace GraphVirtualizationTool
             }
         }
 
-        private void onOpenMatrixFileClickButton(object sender, System.Windows.RoutedEventArgs e)
+        private void onOpenDenseFileClickButton(object sender, System.Windows.RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
             openFileDialog.Filter = "Text files (*.txt)|*.txt";
@@ -33,7 +33,7 @@ namespace GraphVirtualizationTool
         }
 
 
-        private void onOpenListFileClickButton(object sender, System.Windows.RoutedEventArgs e)
+        private void onOpenSparseFileClickButton(object sender, System.Windows.RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
             openFileDialog.Filter = "Text files (*.txt)|*.txt";
@@ -42,6 +42,10 @@ namespace GraphVirtualizationTool
                 GraphGlobalVariables.getInstance().FileNamePath = openFileDialog.FileName;
                 GraphGlobalVariables.getInstance().FileName = Path.GetFileName(GraphGlobalVariables.getInstance().FileNamePath);
                 fileName.DataContext = new TextBlockText() { textdata = Path.GetFileName(openFileDialog.FileName) };
+                AdjacencyList am = new AdjacencyList();
+                Tuple<IEnumerable<Node>, IEnumerable<Edge>> objecta = am.readGraph(am.ParseFile(GraphGlobalVariables.getInstance().FileNamePath));
+                MainViewModel.getInstance().Nodes = new System.Collections.ObjectModel.ObservableCollection<Node>(objecta.Item1);
+                MainViewModel.getInstance().Edges = new System.Collections.ObjectModel.ObservableCollection<Edge>(objecta.Item2);
             }
         }
     }

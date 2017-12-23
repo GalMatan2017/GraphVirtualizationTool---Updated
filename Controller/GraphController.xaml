@@ -8,12 +8,13 @@
         <ResourceDictionary Source="EditorStyles.xaml"/>
     </UserControl.Resources>
     <StackPanel>
-        <Button Click="onOpenMatrixFileClickButton" Background="White">
-            <TextBlock  TextWrapping="Wrap"  FontSize="30" ><Run Text="Insert Adjacency Matrix"/></TextBlock>
+        <Button Click="onOpenDenseFileClickButton" Background="White">
+            <TextBlock  TextWrapping="Wrap"  FontSize="30" ><Run Text="Open Dense Graph File"/></TextBlock>
         </Button>
-        <Button Click="onOpenListFileClickButton" Background="White">
-            <TextBlock TextWrapping="Wrap" FontSize="30" ><Run Text="Insert Adjacency List"/></TextBlock>
+        <Button Click="onOpenSparseFileClickButton" Background="White">
+            <TextBlock TextWrapping="Wrap" FontSize="30" ><Run Text="Open Sparse Graph File"/></TextBlock>
         </Button>
+
 
         <TextBlock Name="fileName" FontSize="15" Text="{Binding textdata}" ></TextBlock>
         <TextBlock Name="graphType" FontSize="15" Text="{Binding textdata}" ></TextBlock>

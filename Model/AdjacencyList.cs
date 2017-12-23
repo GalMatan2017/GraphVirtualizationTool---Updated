@@ -39,22 +39,10 @@ namespace GraphVirtualizationTool.Model
                         //columns constant integer is initiliazed
                         columns = convertedItems.Length;
                     }
-                    else if (convertedItems.Length == columns)
+                    else
                     {
                         list.Add(convertedItems.ToList());
                     }
-                    else
-                    {
-                        throw new Exception($"Row #{rows} is corrupted!");
-                    }
-                }
-
-                if (columns != rows)
-                {
-                    if (rows < columns)
-                        throw new Exception("columns is bigger than rows");
-                    else
-                        throw new Exception("rows is bigger than columns");
                 }
 
                 return list;
@@ -85,16 +73,16 @@ namespace GraphVirtualizationTool.Model
             {
                 for (int col = 1; col < adjList.ElementAt(row).Count; col++)
                 {
-                    if (edges.Find(x => x.Start.Name.Equals($"node {adjList.ElementAt(row)}")
-                                        && x.End.Name.Equals($"node {adjList.ElementAt(col)}")) != null)
+                    if (edges.Find(x => x.Start.Name.Equals($"node {adjList.ElementAt(row).ElementAt(col)}")
+                                        && x.End.Name.Equals(($"node {adjList.ElementAt(row).ElementAt(0)}"))) != null)
                         continue;
                     else
                     {
                         edges.Add(new Edge()
                         {
-                            Name = $"connector {new Random().Next(999)}",
-                            Start = nodes.Single(x => x.Name.Equals($"node {adjList.ElementAt(row)}")),
-                            End = nodes.Single(x => x.Name.Equals($"node {adjList.ElementAt(col)}"))
+                            Name = $"edge {new Random().Next(999)}",
+                            Start = nodes.Single(x => x.Name.Equals($"node {adjList.ElementAt(row).ElementAt(0)}")),
+                            End = nodes.Single(x => x.Name.Equals($"node {adjList.ElementAt(row).ElementAt(col)}"))
                         });
                     }
                 }
