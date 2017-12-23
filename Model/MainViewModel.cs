@@ -7,7 +7,15 @@ namespace GraphVirtualizationTool
 {
     public class MainViewModel: INotifyPropertyChanged
     {
-        private MainViewModel() { ShowNames = true; }
+        private MainViewModel() {
+
+            AdjacencyMatrix am = new AdjacencyMatrix();
+
+
+
+            ShowNames = true;
+
+        }
 
         private static MainViewModel instance = null;
         public static MainViewModel getInstance()
@@ -25,12 +33,14 @@ namespace GraphVirtualizationTool
         public ObservableCollection<Node> Nodes
         {
             get { return _nodes ?? (_nodes = new ObservableCollection<Node>()); }
+            set { }
         }
 
         private ObservableCollection<Edge> _edges;
         public ObservableCollection<Edge> Edges
         {
             get { return _edges ?? (_edges = new ObservableCollection<Edge>()); }
+            set { }
         }
         private DiagramObject _selectedObject;
 

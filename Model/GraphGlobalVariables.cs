@@ -22,8 +22,12 @@ namespace GraphVirtualizationTool
         public int graphTypeFlag { get; set; }
         public string FileNamePath { get; set; }
 
+        public const int MATRIX_FLAG = 4;
+        public const int LIST_FLAG = 5;
+
+
     }
 
 
-  
+
 }

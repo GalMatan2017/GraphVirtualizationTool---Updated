@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 using System.Windows.Controls;
 
 namespace GraphVirtualizationTool
@@ -22,7 +25,10 @@ namespace GraphVirtualizationTool
                 GraphGlobalVariables.getInstance().FileNamePath = openFileDialog.FileName;
                 GraphGlobalVariables.getInstance().FileName = Path.GetFileName(GraphGlobalVariables.getInstance().FileNamePath);
                 fileName.DataContext = new TextBlockText() { textdata = Path.GetFileName(openFileDialog.FileName) };
-                MainViewModel.getInstance().N
+                AdjacencyMatrix am = new AdjacencyMatrix();
+                Tuple<IEnumerable<Node>, IEnumerable<Edge>> objecta = am.readMatrix(am.ParseFile(GraphGlobalVariables.getInstance().FileNamePath));
+                MainViewModel.getInstance().Nodes = new System.Collections.ObjectModel.ObservableCollection<Node>(objecta.Item1);
+                MainViewModel.getInstance().Edges = new System.Collections.ObjectModel.ObservableCollection<Edge>(objecta.Item2);
             }
         }
 
