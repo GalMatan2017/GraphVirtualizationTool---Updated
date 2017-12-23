@@ -8,7 +8,7 @@ namespace GraphVirtualizationTool
 {
     public class GraphGlobalVariables
     {
-        private GraphGlobalVariables() { }
+         private GraphGlobalVariables() { }
         private static GraphGlobalVariables instance = null;
         public static GraphGlobalVariables getInstance()
         {
@@ -18,10 +18,11 @@ namespace GraphVirtualizationTool
             }
             return instance;
         }
-        public string FileName{ get; set; }
-        public int graphTypeFlag { get; set; }
-        public string FileNamePath { get; set; }
-
+        public  string ListFileNamePath { get; set; }
+        public  string MatrixFileNamePath { get; set; }
+        public  string FileName{ get; set; }
+        public  int graphTypeFlag { get; set; }
+        public  int FileButtonFlag { get; set; }
         public const int MATRIX_FLAG = 4;
         public const int LIST_FLAG = 5;
 

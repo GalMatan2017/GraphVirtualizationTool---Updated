@@ -1,14 +1,16 @@
-﻿namespace GraphVirtualizationTool.Model
+﻿using System.Collections.Generic;
+
+namespace GraphVirtualizationTool.Model
 {
     abstract class Graph
     {
-        public Node nodes { get; set; }
+        public List<Node> nodes { get; set; }
 
-        public Edge edges { get; set; }
-        public  string TypeName { get; set; }
+        public List<Edge> edges { get; set; }
+        public string TypeName { get; set; }
 
 
-        abstract public void  GraphDensity();     
-        
+        abstract public void GraphDensity();
+
     }
 }

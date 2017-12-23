@@ -22,11 +22,11 @@ namespace GraphVirtualizationTool
             openFileDialog.Filter = "Text files (*.txt)|*.txt";
             if (openFileDialog.ShowDialog() == true)
             {
-                GraphGlobalVariables.getInstance().FileNamePath = openFileDialog.FileName;
-                GraphGlobalVariables.getInstance().FileName = Path.GetFileName(GraphGlobalVariables.getInstance().FileNamePath);
+                GraphGlobalVariables.getInstance().MatrixFileNamePath = openFileDialog.FileName;
+                GraphGlobalVariables.getInstance().FileName = Path.GetFileName(GraphGlobalVariables.getInstance().MatrixFileNamePath);
                 fileName.DataContext = new TextBlockText() { textdata = Path.GetFileName(openFileDialog.FileName) };
                 AdjacencyMatrix am = new AdjacencyMatrix();
-                Tuple<IEnumerable<Node>, IEnumerable<Edge>> objecta = am.readMatrix(am.ParseFile(GraphGlobalVariables.getInstance().FileNamePath));
+                Tuple<IEnumerable<Node>, IEnumerable<Edge>> objecta = am.readMatrix(am.ParseFile(GraphGlobalVariables.getInstance().MatrixFileNamePath));
                 MainViewModel.getInstance().Nodes = new System.Collections.ObjectModel.ObservableCollection<Node>(objecta.Item1);
                 MainViewModel.getInstance().Edges = new System.Collections.ObjectModel.ObservableCollection<Edge>(objecta.Item2);
             }
@@ -39,11 +39,11 @@ namespace GraphVirtualizationTool
             openFileDialog.Filter = "Text files (*.txt)|*.txt";
             if (openFileDialog.ShowDialog() == true)
             {
-                GraphGlobalVariables.getInstance().FileNamePath = openFileDialog.FileName;
-                GraphGlobalVariables.getInstance().FileName = Path.GetFileName(GraphGlobalVariables.getInstance().FileNamePath);
+                GraphGlobalVariables.getInstance().ListFileNamePath = openFileDialog.FileName;
+                GraphGlobalVariables.getInstance().FileName = Path.GetFileName(GraphGlobalVariables.getInstance().ListFileNamePath);
                 fileName.DataContext = new TextBlockText() { textdata = Path.GetFileName(openFileDialog.FileName) };
                 AdjacencyList am = new AdjacencyList();
-                Tuple<IEnumerable<Node>, IEnumerable<Edge>> objecta = am.readGraph(am.ParseFile(GraphGlobalVariables.getInstance().FileNamePath));
+                Tuple<IEnumerable<Node>, IEnumerable<Edge>> objecta = am.readGraph(am.ParseFile(GraphGlobalVariables.getInstance().ListFileNamePath));
                 MainViewModel.getInstance().Nodes = new System.Collections.ObjectModel.ObservableCollection<Node>(objecta.Item1);
                 MainViewModel.getInstance().Edges = new System.Collections.ObjectModel.ObservableCollection<Edge>(objecta.Item2);
             }
