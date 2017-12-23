@@ -88,7 +88,7 @@ namespace GraphVirtualizationTool
                 if (vm.SelectedObject != null)
                     vm.SelectedObject.IsNew = false;
 
-                vm.CreatingNewNode = false;
+               // vm.CreatingNewNode = false;
                 vm.CreatingNewConnector = false;
             }
         }

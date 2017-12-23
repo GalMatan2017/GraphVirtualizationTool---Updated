@@ -11,7 +11,8 @@ namespace GraphVirtualizationTool
 
             AdjacencyMatrix am = new AdjacencyMatrix();
 
-
+           // _nodes = new ObservableCollection<Node>(NodesDataSource.GetRandomNodes());
+           //  _edges = new ObservableCollection<Edge>(NodesDataSource.GetRandomConnectors(Nodes.ToList()));
 
             ShowNames = true;
 
@@ -33,14 +34,25 @@ namespace GraphVirtualizationTool
         public ObservableCollection<Node> Nodes
         {
             get { return _nodes ?? (_nodes = new ObservableCollection<Node>()); }
-            set { }
+            set
+            {
+                if (value != null)
+                {
+                    _nodes = value;
+                    OnPropertyChanged("Nodes");
+                }
+            }
         }
 
         private ObservableCollection<Edge> _edges;
         public ObservableCollection<Edge> Edges
         {
             get { return _edges ?? (_edges = new ObservableCollection<Edge>()); }
-            set { }
+            set
+            {
+                if (value != null)
+                    _edges = value;
+            }
         }
         private DiagramObject _selectedObject;
 
@@ -116,20 +128,20 @@ namespace GraphVirtualizationTool
 
         #region Creating New Objects
         
-        private bool _creatingNewNode;
-        public bool CreatingNewNode
-        {
-            get { return _creatingNewNode; }
-            set
-            {
-                _creatingNewNode = value;
-                OnPropertyChanged("CreatingNewNode");
+        //private bool _creatingNewNode;
+        //public bool CreatingNewNode
+        //{
+        //    get { return _creatingNewNode; }
+        //    set
+        //    {
+        //        _creatingNewNode = value;
+        //        OnPropertyChanged("CreatingNewNode");
 
-                if (value)
-                    for (int i = 0; i < 10; i++)
-                        CreateNewNode();
-            }
-        }
+        //        if (value)
+        //            for (int i = 0; i < 10; i++)
+        //                CreateNewNode();
+        //    }
+        //}
 
         public void CreateNewNode()
         {
