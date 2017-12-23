@@ -89,11 +89,6 @@ C:\Users\User\Desktop\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtu
 C:\Users\User\Desktop\GraphVirtualizationTool - Updated\obj\x86\Debug\NodesEditor.exe
 C:\Users\User\Desktop\GraphVirtualizationTool - Updated\obj\x86\Debug\NodesEditor.pdb
 C:\Users\User\Desktop\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtualizationTool.csprojResolveAssemblyReference.cache
-E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtualizationTool.exe
-E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtualizationTool.pdb
-E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\bin\Debug\GraphVirtualizationTool.exe
-E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\bin\Debug\GraphVirtualizationTool.pdb
-E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtualizationTool.csprojResolveAssemblyReference.cache
 E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\Controller\EditorStyles.baml
 E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\Controller\GraphController.baml
 E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\App.baml
@@ -103,7 +98,12 @@ E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\App.g.
 E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
 E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtualizationTool_MarkupCompile.cache
 E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtualizationTool_MarkupCompile.lref
+E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\bin\Debug\GraphVirtualizationTool.exe
+E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\bin\Debug\GraphVirtualizationTool.pdb
 E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\MainWindow.baml
 E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtualizationTool.g.resources
 E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtualizationTool.Properties.Resources.resources
 E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtualizationTool.csproj.GenerateResource.Cache
+E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtualizationTool.exe
+E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtualizationTool.pdb
+E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtualizationTool.csprojResolveAssemblyReference.cache

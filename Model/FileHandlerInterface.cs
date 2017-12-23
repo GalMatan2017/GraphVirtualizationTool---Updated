@@ -7,6 +7,6 @@ namespace GraphVirtualizationTool
 {
     interface FileHandlerInterface
     {
-        List<List<int>> ParseFile();
+        List<List<int>> ParseFile(string filename);
     }
 }

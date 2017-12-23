@@ -7,11 +7,11 @@ namespace GraphVirtualizationTool
 {
     class AdjacencyMatrix : FileHandlerInterface
     {
-        public List<List<int>> ParseFile()
+        public List<List<int>> ParseFile(string filename)
         {
             List<List<int>> matrix = new List<List<int>>();
 
-            StreamReader reader = File.OpenText("filename.txt");
+            StreamReader reader = File.OpenText(filename);
 
             string line;
             int columns = 0,

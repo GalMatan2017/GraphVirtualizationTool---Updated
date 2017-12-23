@@ -7,9 +7,20 @@ namespace GraphVirtualizationTool
 {
     public class MainViewModel: INotifyPropertyChanged
     {
+        private MainViewModel() { ShowNames = true; }
+
+        private static MainViewModel instance = null;
+        public static MainViewModel getInstance()
+        {
+                if (instance == null)
+                {
+                    instance = new MainViewModel();
+                }
+                return instance;
+        }
+
         #region Collections
-        private List<Node> listofnodes = new List<Node>();
-        
+
         private ObservableCollection<Node> _nodes;
         public ObservableCollection<Node> Nodes
         {
@@ -70,15 +81,15 @@ namespace GraphVirtualizationTool
 
         #region Constructor
 
-        public MainViewModel()
-        {
-            _nodes = new ObservableCollection<Node>(NodesDataSource.setNodes(listofnodes));
+        //public MainViewModel()
+        //{
+        //    //_nodes = new ObservableCollection<Node>(NodesDataSource.setNodes(listofnodes));
 
-           // _nodes = new ObservableCollection<Node>(NodesDataSource.GetRandomNodes());
-            _edges = new ObservableCollection<Edge>(NodesDataSource.GetRandomConnectors(Nodes.ToList()));
-            CreateNewNode();
-            ShowNames = true;
-        }
+        //   // _nodes = new ObservableCollection<Node>(NodesDataSource.GetRandomNodes());
+        //   // _edges = new ObservableCollection<Edge>(NodesDataSource.GetRandomConnectors(Nodes.ToList()));
+
+        //    ShowNames = true;
+        //}
 
         #endregion
 

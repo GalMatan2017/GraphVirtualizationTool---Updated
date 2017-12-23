@@ -4,11 +4,8 @@
         <Setter Property="Margin" Value="2"/>
         <Setter Property="HorizontalAlignment" Value="Right"/>
     </Style>
-
     <Style TargetType="TextBox">
         <Setter Property="Margin" Value="2"/>   
-        
-        
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
@@ -18,7 +15,6 @@
         <Setter Property="Margin" Value="2"/>
         <Setter  Property="HorizontalAlignment" Value="Center"/>
     </Style>
-
     <Style TargetType="ToggleButton" BasedOn="{StaticResource ButtonBaseStyle}"/>
     <Style TargetType="Button" BasedOn="{StaticResource ButtonBaseStyle}">
         <Setter Property="ContentTemplate">

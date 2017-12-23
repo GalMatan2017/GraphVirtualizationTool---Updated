@@ -9,10 +9,10 @@
     </UserControl.Resources>
     <StackPanel>
         <Button Click="onOpenMatrixFileClickButton" Background="White">
-            <TextBlock  TextWrapping="Wrap"  FontSize="30" ><Run Text="Insert Ajacency Matrix"/></TextBlock>
+            <TextBlock  TextWrapping="Wrap"  FontSize="30" ><Run Text="Insert Adjacency Matrix"/></TextBlock>
         </Button>
         <Button Click="onOpenListFileClickButton" Background="White">
-            <TextBlock TextWrapping="Wrap" FontSize="30" ><Run Text="Insert Ajacency List"/></TextBlock>
+            <TextBlock TextWrapping="Wrap" FontSize="30" ><Run Text="Insert Adjacency List"/></TextBlock>
         </Button>
 
         <TextBlock Name="fileName" FontSize="15" Text="{Binding textdata}" ></TextBlock>

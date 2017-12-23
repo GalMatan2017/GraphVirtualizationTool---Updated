@@ -10,19 +10,16 @@ namespace GraphVirtualizationTool
 {
     public partial class MainWindow : Window
     {
-        public List<Node> Nodes { get; set; }
-        public List<Edge> Connectors { get; set; }
-
         public MainWindow()
         {
 
             //-------------------globalflag-----------------//
-            GraphGlobalVariables.graphTypeFlag = 1;
+            GraphGlobalVariables.getInstance().graphTypeFlag = 1;
             //-------------------globalflag-----------------//
 
 
             InitializeComponent();
-            DataContext = new MainViewModel();
+            DataContext = MainViewModel.getInstance();
 
         }
 

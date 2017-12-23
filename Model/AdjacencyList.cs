@@ -8,13 +8,13 @@ namespace GraphVirtualizationTool.Model
 {
     class AdjacencyList : FileHandlerInterface
     {
-        public List<List<int>> ParseFile()
+        public List<List<int>> ParseFile(string filename)
         {
             //return value
             List<List<int>> list = new List<List<int>>();
 
             //open file
-            StreamReader reader = File.OpenText("filename.txt");
+            StreamReader reader = File.OpenText(filename);
 
             string line;
             int columns = 0,
