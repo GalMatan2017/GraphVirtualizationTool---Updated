@@ -8,9 +8,13 @@ namespace GraphVirtualizationTool.Model
 {
     class AdjacencyList : FileHandlerInterface
     {
-        public List<List<int>> ParseFile(string filename)
+        public List<List<bool>> ParseFile(string filename) {
+            List<List<bool>> a = new List<List<bool>>();
+                return a;
+        }
+        /* public List<List<bool>> ParseFile(string filename)
         {
-            try
+           try
             {
                 //return value
                 List<List<int>> list = new List<List<int>>();
@@ -53,9 +57,9 @@ namespace GraphVirtualizationTool.Model
                 Console.WriteLine(ex.Message);
                 return new List<List<int>>(); ;
 
-            }
+            }*/
         }
-
+    /*
         public Tuple<IEnumerable<Node>, IEnumerable<Edge>> readGraph(List<List<int>> adjList)
         {
             List<Node> nodes = new List<Node>();
@@ -87,9 +91,9 @@ namespace GraphVirtualizationTool.Model
                     }
                 }
             }
-
+            
             return new Tuple<IEnumerable<Node>, IEnumerable<Edge>>(nodes, edges);
 
-        }
+        }*/
     }
-}
+

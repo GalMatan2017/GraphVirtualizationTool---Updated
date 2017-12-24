@@ -12,15 +12,10 @@ namespace GraphVirtualizationTool
     {
         public MainWindow()
         {
-
-            //-------------------globalflag-----------------//
-            GraphGlobalVariables.getInstance().graphTypeFlag = 1;
-            //-------------------globalflag-----------------//
-
+          
 
             InitializeComponent();
             DataContext = MainViewModel.getInstance();
-
         }
 
         private void Thumb_Drag(object sender, DragDeltaEventArgs e)

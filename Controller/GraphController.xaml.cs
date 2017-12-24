@@ -26,7 +26,15 @@ namespace GraphVirtualizationTool
                 GraphGlobalVariables.getInstance().FileName = Path.GetFileName(GraphGlobalVariables.getInstance().MatrixFileNamePath);
                 fileName.DataContext = new TextBlockText() { textdata = Path.GetFileName(openFileDialog.FileName) };
                 AdjacencyMatrix am = new AdjacencyMatrix();
-                Tuple<IEnumerable<Node>, IEnumerable<Edge>> objecta = am.readMatrix(am.ParseFile(GraphGlobalVariables.getInstance().MatrixFileNamePath));
+                List<List<bool>> a=am.ParseFile(GraphGlobalVariables.getInstance().MatrixFileNamePath);
+                Algorithms aa = new Algorithms();
+                int size =a.Count;
+                int[] colorArr = new int[size]; // number of vertices to be "colored"
+                if (aa.isBipartite(a, 0, colorArr))
+                {
+                    graphType.DataContext = new TextBlockText() { textdata = "Bipartite Graph!" };
+                }
+                Tuple <IEnumerable<Node>, IEnumerable<Edge>> objecta = am.readMatrix(a);
                 MainViewModel.getInstance().Nodes = new System.Collections.ObjectModel.ObservableCollection<Node>(objecta.Item1);
                 MainViewModel.getInstance().Edges = new System.Collections.ObjectModel.ObservableCollection<Edge>(objecta.Item2);
             }
@@ -43,9 +51,9 @@ namespace GraphVirtualizationTool
                 GraphGlobalVariables.getInstance().FileName = Path.GetFileName(GraphGlobalVariables.getInstance().ListFileNamePath);
                 fileName.DataContext = new TextBlockText() { textdata = Path.GetFileName(openFileDialog.FileName) };
                 AdjacencyList am = new AdjacencyList();
-                Tuple<IEnumerable<Node>, IEnumerable<Edge>> objecta = am.readGraph(am.ParseFile(GraphGlobalVariables.getInstance().ListFileNamePath));
-                MainViewModel.getInstance().Nodes = new System.Collections.ObjectModel.ObservableCollection<Node>(objecta.Item1);
-                MainViewModel.getInstance().Edges = new System.Collections.ObjectModel.ObservableCollection<Edge>(objecta.Item2);
+                //Tuple<IEnumerable<Node>, IEnumerable<Edge>> objecta = am.readGraph(am.ParseFile(GraphGlobalVariables.getInstance().ListFileNamePath));
+                //MainViewModel.getInstance().Nodes = new System.Collections.ObjectModel.ObservableCollection<Node>(objecta.Item1);
+                //MainViewModel.getInstance().Edges = new System.Collections.ObjectModel.ObservableCollection<Edge>(objecta.Item2);
             }
         }
     }

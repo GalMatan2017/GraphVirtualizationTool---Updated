@@ -7,7 +7,7 @@
     <UserControl.Resources>
         <ResourceDictionary Source="EditorStyles.xaml"/>
     </UserControl.Resources>
-    <StackPanel>
+    <StackPanel >
         <Button Click="onOpenDenseFileClickButton" Background="White">
             <TextBlock  TextWrapping="Wrap"  FontSize="30" ><Run Text="Open Dense Graph File"/></TextBlock>
         </Button>

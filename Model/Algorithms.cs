@@ -7,8 +7,8 @@ namespace GraphVirtualizationTool.Model
 {
     class Algorithms
     {
-        static int V = 4;
-        public bool isBipartite(bool[,] G, int src, int[] colorArr)
+        
+        public bool isBipartite(List<List<bool>> G, int src, int[] colorArr)
         {
 
             // Create a color array to store colors assigned to all veritces. Vertex 
@@ -16,7 +16,7 @@ namespace GraphVirtualizationTool.Model
             // is used to indicate that no color is assigned to vertex 'i'.  The value 
             // 1 is used to indicate first color is assigned and value 0 indicates 
             // second color is assigned.
-
+            int V=G.Count;
             for (int i = 0; i < V; ++i)
                 colorArr[i] = -1;
 
@@ -36,14 +36,14 @@ namespace GraphVirtualizationTool.Model
                 q.Dequeue();
 
                 // Return false if there is a self-loop 
-                if (G[u, u] == true)
+                if (G[u][u] == true)
                     return false;
 
                 // Find all non-colored adjacent vertices
                 for (int v = 0; v < V; ++v)
                 {
                     // An edge from u to v exists and destination v is not colored
-                    if (G[u, v] && (colorArr[v] == -1))
+                    if (G[u][v] && (colorArr[v] == -1))
                     {
                         // Assign alternate color to this adjacent v of u
                         colorArr[v] = 1 - colorArr[u];
@@ -52,7 +52,7 @@ namespace GraphVirtualizationTool.Model
 
                     //  An edge from u to v exists and destination v is colored with
                     // same color as u
-                    else if (G[u, v] && colorArr[v] == colorArr[u])
+                    else if (G[u][v] && colorArr[v] == colorArr[u])
                         return false;
                 }
             }

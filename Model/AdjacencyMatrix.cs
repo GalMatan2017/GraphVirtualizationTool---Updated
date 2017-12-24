@@ -7,11 +7,11 @@ namespace GraphVirtualizationTool.Model
 {
     class AdjacencyMatrix : FileHandlerInterface
     {
-        public List<List<int>> ParseFile(string filename)
+        public List<List<bool>> ParseFile(string filename)
         {
             try
             {
-                List<List<int>> matrix = new List<List<int>>();
+                List<List<bool>> matrix = new List<List<bool>>();
 
                 StreamReader reader = File.OpenText(filename);
 
@@ -28,8 +28,19 @@ namespace GraphVirtualizationTool.Model
                     if (!(items.Length > 1))
                         throw new Exception($"Row {rows} is corrupted!");
                     //convert to integers
-                    int[] convertedItems = Array.ConvertAll(items, int.Parse);
-                    foreach (var item in convertedItems)
+                     
+                    int[] convertedItemsint = Array.ConvertAll(items, int.Parse);
+                    int size =convertedItemsint.Count();
+                    bool[] convertedItems = new bool[size] ;
+                    for(int i = 0; i < size; i++)
+                    {
+                        if (convertedItemsint[i] == 1)
+                            convertedItems[i] = true;
+                        if (convertedItemsint[i] == 0)
+                            convertedItems[i] = false;
+                    }
+                    foreach (var item in convertedItemsint)
+                      
                         if (item != 0 && item != 1)
                             throw new Exception($"Found illegal character at row {rows}");
                     if (rows == 1)
@@ -62,12 +73,12 @@ namespace GraphVirtualizationTool.Model
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return new List<List<int>>(); ;
+                return new List<List<bool>>(); ;
 
             }
         }
 
-        public Tuple<IEnumerable<Node>, IEnumerable<Edge>> readMatrix(List<List<int>> matrix)
+        public Tuple<IEnumerable<Node>, IEnumerable<Edge>> readMatrix(List<List<bool>> matrix)
         {
             List<Node> nodes = new List<Node>();
             List<Edge> edges = new List<Edge>();
@@ -82,7 +93,7 @@ namespace GraphVirtualizationTool.Model
                 {
                     if (col == row)
                         continue;
-                    if (matrix.ElementAt(row).ElementAt(col) == 1)
+                    if (matrix.ElementAt(row).ElementAt(col) == true)
                     {
                         edges.Add(new Edge()
                         {
