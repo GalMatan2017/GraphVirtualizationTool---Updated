@@ -25,8 +25,12 @@ namespace GraphVirtualizationTool
                 GraphGlobalVariables.getInstance().MatrixFileNamePath = openFileDialog.FileName;
                 GraphGlobalVariables.getInstance().FileName = Path.GetFileName(GraphGlobalVariables.getInstance().MatrixFileNamePath);
                 fileName.DataContext = new TextBlockText() { textdata = Path.GetFileName(openFileDialog.FileName) };
+
+
+
+
                 AdjacencyMatrix am = new AdjacencyMatrix();
-                List<List<bool>> a=am.ParseFile(GraphGlobalVariables.getInstance().MatrixFileNamePath);
+                List<List<bool>> a=am.ParseFile<List<List<bool>>>(GraphGlobalVariables.getInstance().MatrixFileNamePath);
                 Algorithms aa = new Algorithms();
                 int size =a.Count;
                 int[] colorArr = new int[size]; // number of vertices to be "colored"
@@ -51,9 +55,9 @@ namespace GraphVirtualizationTool
                 GraphGlobalVariables.getInstance().FileName = Path.GetFileName(GraphGlobalVariables.getInstance().ListFileNamePath);
                 fileName.DataContext = new TextBlockText() { textdata = Path.GetFileName(openFileDialog.FileName) };
                 AdjacencyList am = new AdjacencyList();
-                //Tuple<IEnumerable<Node>, IEnumerable<Edge>> objecta = am.readGraph(am.ParseFile(GraphGlobalVariables.getInstance().ListFileNamePath));
-                //MainViewModel.getInstance().Nodes = new System.Collections.ObjectModel.ObservableCollection<Node>(objecta.Item1);
-                //MainViewModel.getInstance().Edges = new System.Collections.ObjectModel.ObservableCollection<Edge>(objecta.Item2);
+                Tuple<IEnumerable<Node>, IEnumerable<Edge>> objecta = am.readGraph(am.ParseFile<List<List<int>>>(GraphGlobalVariables.getInstance().ListFileNamePath));
+                MainViewModel.getInstance().Nodes = new System.Collections.ObjectModel.ObservableCollection<Node>(objecta.Item1);
+                MainViewModel.getInstance().Edges = new System.Collections.ObjectModel.ObservableCollection<Edge>(objecta.Item2);
             }
         }
     }

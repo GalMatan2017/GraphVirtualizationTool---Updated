@@ -8,24 +8,18 @@ namespace GraphVirtualizationTool.Model
 {
     class AdjacencyList : FileHandlerInterface
     {
-        public List<List<bool>> ParseFile(string filename) {
-            List<List<bool>> a = new List<List<bool>>();
-                return a;
-        }
-        /* public List<List<bool>> ParseFile(string filename)
+
+        public T ParseFile<T>(string filename)
         {
-           try
+            try
             {
                 //return value
                 List<List<int>> list = new List<List<int>>();
-
                 //open file
                 StreamReader reader = File.OpenText(filename);
-
                 string line;
                 int columns = 0,
                     rows = 0;
-
                 //read line
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -36,7 +30,6 @@ namespace GraphVirtualizationTool.Model
                         throw new Exception($"Row {rows} is corrupted!");
                     //convert to integers
                     int[] convertedItems = Array.ConvertAll(items, int.Parse);
-
                     if (rows == 1)
                     {
                         list.Add(convertedItems.ToList());
@@ -49,30 +42,27 @@ namespace GraphVirtualizationTool.Model
                     }
                 }
 
-                return list;
+                return   (T)Convert.ChangeType(list, typeof(T));
             }
-
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return new List<List<int>>(); ;
-
-            }*/
+                return (T)Convert.ChangeType(new List<List<int>>(), typeof(T));
+            }
         }
-    /*
+
         public Tuple<IEnumerable<Node>, IEnumerable<Edge>> readGraph(List<List<int>> adjList)
         {
             List<Node> nodes = new List<Node>();
             List<Edge> edges = new List<Edge>();
-
             int rows = adjList.Count;
-
             for (int row = 0; row < rows; row++)
-                nodes.Add(new Node() {
+                nodes.Add(new Node()
+                {
                     Name = $"node {adjList.ElementAt(row).ElementAt(0)}",
                     X = new Random().Next(100),
-                    Y = new Random().Next(100) });
-
+                    Y = new Random().Next(100)
+                });
             for (int row = 0; row < adjList.Count; row++)
             {
                 for (int col = 1; col < adjList.ElementAt(row).Count; col++)
@@ -91,9 +81,8 @@ namespace GraphVirtualizationTool.Model
                     }
                 }
             }
-            
+
             return new Tuple<IEnumerable<Node>, IEnumerable<Edge>>(nodes, edges);
-
-        }*/
+        }
     }
-
+}

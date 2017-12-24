@@ -7,7 +7,7 @@ namespace GraphVirtualizationTool.Model
 {
     class AdjacencyMatrix : FileHandlerInterface
     {
-        public List<List<bool>> ParseFile(string filename)
+        public T ParseFile<T>(string filename)
         {
             try
             {
@@ -68,12 +68,12 @@ namespace GraphVirtualizationTool.Model
                         throw new Exception("rows is bigger than columns");
                 }
 
-                return matrix;
+                return (T)Convert.ChangeType(matrix, typeof(T)) ;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return new List<List<bool>>(); ;
+                return (T)Convert.ChangeType(new List<List<bool>>(), typeof(T)) ;
 
             }
         }
