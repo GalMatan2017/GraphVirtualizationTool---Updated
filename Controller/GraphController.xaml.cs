@@ -55,7 +55,16 @@ namespace GraphVirtualizationTool
                 GraphGlobalVariables.getInstance().FileName = Path.GetFileName(GraphGlobalVariables.getInstance().ListFileNamePath);
                 fileName.DataContext = new TextBlockText() { textdata = Path.GetFileName(openFileDialog.FileName) };
                 AdjacencyList am = new AdjacencyList();
-                Tuple<IEnumerable<Node>, IEnumerable<Edge>> objecta = am.readGraph(am.ParseFile<List<List<int>>>(GraphGlobalVariables.getInstance().ListFileNamePath));
+                List<List<int>> a = am.ParseFile<List<List<int>>>(GraphGlobalVariables.getInstance().ListFileNamePath);
+                Algorithms aa = new Algorithms();
+
+                int size = a.Count;
+                int[] colorArr = new int[size+1]; // number of vertices to be "colored"
+                if (aa.isBipartite(a, 1, colorArr))
+                {
+                    graphType.DataContext = new TextBlockText() { textdata = "Bipartite Graph!" };
+                }
+                Tuple<IEnumerable<Node>, IEnumerable<Edge>> objecta = am.readGraph(a);
                 MainViewModel.getInstance().Nodes = new System.Collections.ObjectModel.ObservableCollection<Node>(objecta.Item1);
                 MainViewModel.getInstance().Edges = new System.Collections.ObjectModel.ObservableCollection<Edge>(objecta.Item2);
             }

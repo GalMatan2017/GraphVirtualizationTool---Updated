@@ -61,7 +61,67 @@ namespace GraphVirtualizationTool.Model
             // alternate color
             return true;
         }
-        bool isConnected()
+
+
+        
+
+
+
+        public bool isBipartite(List<List<int>> graph, int v, int[] color)
+        {
+            // stores vertex is discovered or not
+            bool [] discovered= new bool[graph.Count+1];
+
+            // stores level of each vertex in BFS
+            int[] level = new int[graph.Count+1];
+
+            // mark source vertex as discovered and 
+            // set its level to 0
+            discovered[v] = true;
+            level[v] = 0;
+
+            // create a queue to do BFS and enqueue 
+            // source vertex in it
+            Queue<int> q = new Queue<int>();
+            q.Enqueue(v);
+
+            // run till queue is not empty
+            while (q.Count !=0)
+            {
+                // pop front node from the queue
+                v = q.Peek();
+                q.Dequeue();
+
+                // do for every edge (v -> u)
+                int u = 0;
+                for (int i = 1 ; i< graph[v-1].Count;i++)
+                {
+                    u = graph[v - 1][i];
+                    // if vertex u is explored for first time
+                    if (!discovered[u])
+                    {
+                        // mark it discovered
+                        discovered[u] = true;
+
+                        // set level as level of parent node + 1
+                        level[u] = level[v] + 1;
+
+                        // push the vertex into the queue
+                        q.Enqueue(u);
+                    }
+
+                    // if the vertex is already been discovered and
+                    // level of vertex u and v are same, then the 
+                    // graph contains an odd-cycle & is not biparte
+                    else if (level[v] == level[u])
+                        return false;
+                }
+            }
+
+            return true;
+
+        }
+            bool isConnected()
         {
             //TODO 
             return true;
