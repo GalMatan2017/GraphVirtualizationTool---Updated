@@ -7,19 +7,15 @@ namespace GraphVirtualizationTool.Model
 {
     class Algorithms
     {
-        
-        public bool isBipartite(List<List<bool>> G, int src, int[] colorArr)
+        public bool isBipartite_util(List<List<bool>> G, int src, int[] colorArr)
         {
-
             // Create a color array to store colors assigned to all veritces. Vertex 
             // number is used as index in this array. The value '-1' of  colorArr[i] 
             // is used to indicate that no color is assigned to vertex 'i'.  The value 
             // 1 is used to indicate first color is assigned and value 0 indicates 
             // second color is assigned.
-            int V=G.Count;
-            for (int i = 0; i < V; ++i)
-                colorArr[i] = -1;
 
+            int V = G.Count;
             // Assign first color to source
             colorArr[src] = 1;
 
@@ -56,21 +52,30 @@ namespace GraphVirtualizationTool.Model
                         return false;
                 }
             }
-
             // If we reach here, then all adjacent vertices can be colored with 
             // alternate color
             return true;
         }
+        public bool isBipartite(List<List<bool>> G, int src, int[] colorArr)//remove scr
+        {
+            int V = G.Count;
+            for (int i = 0; i < V; ++i)
+                colorArr[i] = -1;
 
-
-        
-
-
-
-        public bool isBipartite(List<List<int>> graph, int v, int[] color)
+            for (int i = 0; i < V; i++)
+            {
+                if (colorArr[i] == -1)
+                {
+                    if (!isBipartite_util(G,i, colorArr))
+                        return false;
+                }
+            }
+            return true;
+        }
+        public bool isBipartite_util(List<List<int>> graph, int v, bool[] discovered)
         {
             // stores vertex is discovered or not
-            bool [] discovered= new bool[graph.Count+1];
+           
 
             // stores level of each vertex in BFS
             int[] level = new int[graph.Count+1];
@@ -121,10 +126,144 @@ namespace GraphVirtualizationTool.Model
             return true;
 
         }
-            bool isConnected()
+        public bool isBipartite(List<List<int>> graph, int src, int[] color)//remove source
         {
-            //TODO 
+            int V = graph.Count;
+            bool[] discovered = new bool[graph.Count + 1];
+
+            for (int i = 1; i < V; i++)
+            {
+                if (discovered[i] == false)
+                {
+                    if (!isBipartite_util(graph, i, discovered))
+                        return false;
+                }
+            }
             return true;
         }
+           public bool isConnected(List<List<int>> graph, int v)
+           {
+            // stores vertex is discovered or not
+            bool[] discovered = new bool[graph.Count + 1];
+
+            // stores level of each vertex in BFS
+            int[] level = new int[graph.Count + 1];
+
+            // mark source vertex as discovered and 
+            // set its level to 0
+            discovered[v] = true;
+            level[v] = 0;
+
+            // create a queue to do BFS and enqueue 
+            // source vertex in it
+            Queue<int> q = new Queue<int>();
+            q.Enqueue(v);
+
+            // run till queue is not empty
+            while (q.Count != 0)
+            {
+                // pop front node from the queue
+                v = q.Peek();
+                q.Dequeue();
+
+                // do for every edge (v -> u)
+                int u = 0;
+                for (int i = 1; i < graph[v - 1].Count; i++)
+                {
+                    u = graph[v - 1][i];
+                    // if vertex u is explored for first time
+                    if (!discovered[u])
+                    {
+                        // mark it discovered
+                        discovered[u] = true;
+
+                        // set level as level of parent node + 1
+                        level[u] = level[v] + 1;
+
+                        // push the vertex into the queue
+                        q.Enqueue(u);
+                    }
+
+                    // if the vertex is already been discovered and
+                    // level of vertex u and v are same, then the 
+                    // graph contains an odd-cycle & is not biparte
+                    else if (level[v] == level[u])
+                        return false;
+                }
+            }
+
+            for (int i = 1; i < discovered.Length; i++)
+            {
+                if(discovered[i] == false)
+                {
+                    return false;
+                }
+            }
+            return true;
+
+        }
+
+       /* public bool isConnected(List<List<bool>> graph, int v)
+        {
+            // stores vertex is discovered or not
+            bool[] discovered = new bool[graph.Count + 1];
+
+            // stores level of each vertex in BFS
+            int[] level = new int[graph.Count + 1];
+
+            // mark source vertex as discovered and 
+            // set its level to 0
+            discovered[v] = true;
+            level[v] = 0;
+
+            // create a queue to do BFS and enqueue 
+            // source vertex in it
+            Queue<int> q = new Queue<int>();
+            q.Enqueue(v);
+
+            // run till queue is not empty
+            while (q.Count != 0)
+            {
+                // pop front node from the queue
+                v = q.Peek();
+                q.Dequeue();
+
+                // do for every edge (v -> u)
+                int u = 0;
+                for (int i = 1; i < graph[v - 1].Count; i++)
+                {
+                    u = graph[v - 1][i];
+                    // if vertex u is explored for first time
+                    if (!discovered[u])
+                    {
+                        // mark it discovered
+                        discovered[u] = true;
+
+                        // set level as level of parent node + 1
+                        level[u] = level[v] + 1;
+
+                        // push the vertex into the queue
+                        q.Enqueue(u);
+                    }
+
+                    // if the vertex is already been discovered and
+                    // level of vertex u and v are same, then the 
+                    // graph contains an odd-cycle & is not biparte
+                    else if (level[v] == level[u])
+                        return false;
+                }
+            }
+
+            for (int i = 1; i < discovered.Length; i++)
+            {
+                if (discovered[i] == false)
+                {
+                    return false;
+                }
+            }
+            return true;
+
+        }*/
+
     }
 }
