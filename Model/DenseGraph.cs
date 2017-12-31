@@ -7,10 +7,35 @@ namespace GraphVirtualizationTool.Model
 {
     class DenseGraph : Graph
     {
-        public override void GraphDensity()
+        private List<List<bool>> _matrix;
+
+        
+        public string TypeName
         {
-            //TODO
-            throw new NotImplementedException();
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        
+        
+        public  TValue getGraph<TValue>()
+        {
+
+            return (TValue)Convert.ChangeType(_matrix, typeof(TValue));
+
+        }
+
+        public void setGraph<TValue>(TValue graph)
+        {
+            _matrix = new List<List<bool>>();
+            _matrix = (List<List<bool>>)Convert.ChangeType(graph, typeof(List<List<bool>>));
         }
     }
 }

@@ -55,13 +55,14 @@ namespace GraphVirtualizationTool.Model
         {
             List<Node> nodes = new List<Node>();
             List<Edge> edges = new List<Edge>();
+            Random random = new Random();
             int rows = adjList.Count;
             for (int row = 0; row < rows; row++)
                 nodes.Add(new Node()
                 {
                     Name = $"node {adjList.ElementAt(row).ElementAt(0)}",
-                    X = new Random().Next(100),
-                    Y = new Random().Next(100)
+                    X = random.Next(50, 500),
+                    Y = random.Next(50, 500)
                 });
             for (int row = 0; row < adjList.Count; row++)
             {

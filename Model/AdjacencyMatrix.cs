@@ -80,13 +80,15 @@ namespace GraphVirtualizationTool.Model
 
         public Tuple<IEnumerable<Node>, IEnumerable<Edge>> readMatrix(List<List<bool>> matrix)
         {
+
             List<Node> nodes = new List<Node>();
             List<Edge> edges = new List<Edge>();
+            Random random = new Random();
 
-            int rows = matrix.Count;
+        int rows = matrix.Count;
 
             for (int row = 0; row < rows; row++)
-                nodes.Add(new Node() { Name = $"node {row}", X = new Random().Next(100), Y = new Random().Next(100) });
+                nodes.Add(new Node() { Name = $"node {row}", X = random.Next(50,500), Y = random.Next(50, 500) });
             for (int row = 0; row < matrix.Count; row++)
             {
                 for (int col = matrix.Count - 1; col > row - 1; col--)

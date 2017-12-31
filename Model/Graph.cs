@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GraphVirtualizationTool.Model
 {
-    abstract class Graph
-    {
-        public List<Node> nodes { get; set; }
+    interface  Graph
+    {  
+         string TypeName { get; set; }
 
-        public List<Edge> edges { get; set; }
-        public string TypeName { get; set; }
+        TValue getGraph<TValue>();
 
-
-        abstract public void GraphDensity();
-
+        void setGraph<TValue>(TValue graph);
+ 
     }
+
 }
