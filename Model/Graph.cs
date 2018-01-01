@@ -10,7 +10,9 @@ namespace GraphVirtualizationTool.Model
         TValue getGraph<TValue>();
 
         void setGraph<TValue>(TValue graph);
- 
+
+
+        List<int> getNeighbors(int node);
     }
 
 }

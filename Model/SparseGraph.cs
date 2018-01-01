@@ -8,6 +8,8 @@ namespace GraphVirtualizationTool.Model
     class SparseGraph : Graph
     {
         private List<List<int>> _list;
+        private List<int> templist = new List<int>();
+
         public string TypeName
         {
             get
@@ -33,5 +35,15 @@ namespace GraphVirtualizationTool.Model
             _list = new List<List<int>>();
             _list = (List<List<int>>)Convert.ChangeType(graph, typeof(List<List<int>>));
         }
+
+        List<int> Graph.getNeighbors(int node)
+        { 
+                return _list[node-1]; 
+        }
+
+       
+
+
+
     }
 }

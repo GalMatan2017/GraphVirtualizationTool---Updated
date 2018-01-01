@@ -8,8 +8,8 @@ namespace GraphVirtualizationTool.Model
     class DenseGraph : Graph
     {
         private List<List<bool>> _matrix;
+        private List<int> templist = new List<int>();
 
-        
         public string TypeName
         {
             get
@@ -37,5 +37,20 @@ namespace GraphVirtualizationTool.Model
             _matrix = new List<List<bool>>();
             _matrix = (List<List<bool>>)Convert.ChangeType(graph, typeof(List<List<bool>>));
         }
+
+        List<int> Graph.getNeighbors(int node)
+        {
+            
+            for(int i = 0; i < _matrix.Count; i++)
+            {
+                if(_matrix[node-1][i] == true)
+                    templist.Add( i+1);
+
+            }
+            return templist;
+        }
+
+        
+
     }
 }

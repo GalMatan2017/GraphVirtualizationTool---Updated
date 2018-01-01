@@ -7,13 +7,12 @@
     <UserControl.Resources>
         <ResourceDictionary Source="EditorStyles.xaml"/>
     </UserControl.Resources>
-    <StackPanel >
-        <Button Click="onOpenDenseFileClickButton" Background="White">
-            <TextBlock  TextWrapping="Wrap"  FontSize="30" ><Run Text="Open Dense Graph File"/></TextBlock>
+    <StackPanel Background="LightCyan">
+      
+            <Button Style="{StaticResource RoundCorner}" Click="onOpenGraphFileClickButton" Background="White" Height="164">
+            <TextBlock  TextWrapping="Wrap"  FontSize="30" ><Run Text="   Insert Graph File"/></TextBlock>
         </Button>
-        <Button Click="onOpenSparseFileClickButton" Background="White">
-            <TextBlock TextWrapping="Wrap" FontSize="30" ><Run Text="Open Sparse Graph File"/></TextBlock>
-        </Button>
+        
 
 
         <TextBlock Name="fileName" FontSize="15" Text="{Binding textdata}" ></TextBlock>

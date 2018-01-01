@@ -18,8 +18,8 @@ namespace GraphVirtualizationTool
             }
             return instance;
         }
-        public  string ListFileNamePath { get; set; }
-        public  string MatrixFileNamePath { get; set; }
+        
+        public  string FileNamePath { get; set; }
         public  string FileName{ get; set; }
         public  int graphTypeFlag { get; set; }
         public  int FileButtonFlag { get; set; }

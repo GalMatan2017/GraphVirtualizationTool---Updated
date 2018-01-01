@@ -67,7 +67,7 @@ namespace GraphVirtualizationTool.Model
                     else
                         throw new Exception("rows is bigger than columns");
                 }
-
+                reader.Close();
                 return (T)Convert.ChangeType(matrix, typeof(T)) ;
             }
             catch (Exception ex)

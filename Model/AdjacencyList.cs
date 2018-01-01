@@ -41,7 +41,7 @@ namespace GraphVirtualizationTool.Model
                         list.Add(convertedItems.ToList());
                     }
                 }
-
+                reader.Close();
                 return   (T)Convert.ChangeType(list, typeof(T));
             }
             catch (Exception ex)
@@ -85,5 +85,7 @@ namespace GraphVirtualizationTool.Model
 
             return new Tuple<IEnumerable<Node>, IEnumerable<Edge>>(nodes, edges);
         }
+
+        
     }
 }
