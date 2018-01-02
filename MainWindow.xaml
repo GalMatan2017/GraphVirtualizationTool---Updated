@@ -2,8 +2,8 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:GraphVirtualizationTool"
-        Title="Window1" Height="768" Width="1024" x:Name="view"
-        MinHeight="450" MinWidth="600"
+        Title="Graph Virtualization Tool" Height="768" Width="1024" x:Name="view"
+        MinHeight="480" MinWidth="600"
         >
     
     <DockPanel Background="#FFF8F8FF">
