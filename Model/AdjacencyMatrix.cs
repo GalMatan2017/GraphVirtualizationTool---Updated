@@ -82,41 +82,5 @@ namespace GraphVirtualizationTool.Model
                 return (T)Convert.ChangeType(new List<List<bool>>(), typeof(T)) ;
             }
         }
-
-        public Tuple<IEnumerable<Node>, IEnumerable<Edge>> readMatrix(List<List<bool>> matrix)
-        {
-
-            List<Node> nodes = new List<Node>();
-            List<Edge> edges = new List<Edge>();
-            Random random = new Random();
-
-            int rows = matrix.Count;
-
-            for (int row = 0; row < rows; row++)
-                nodes.Add(new Node() { Name = $"node {row}", X = random.Next(50,500), Y = random.Next(50, 500) });
-            for (int row = 0; row < matrix.Count; row++)
-            {
-                for (int col = matrix.Count - 1; col > row - 1; col--)
-                {
-                    if (col == row)
-                        continue;
-                    if (matrix.ElementAt(row).ElementAt(col) == true)
-                    {
-                        edges.Add(new Edge()
-                        {
-                            Name = $"connector {new Random().Next(999)}",
-                            Start = nodes.Single(x => x.Name.Equals($"node {row}")),
-                            End = nodes.Single(x => x.Name.Equals($"node {col}"))
-                        });
-                    }
-                }
-            }
-
-            return new Tuple<IEnumerable<Node>, IEnumerable<Edge>>(nodes, edges);
-
-        }
-
     }
-
-
 }

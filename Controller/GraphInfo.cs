@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GraphVirtualizationTool
 {
-    public class TextBlockText
+    public class GraphInfo
     {
         public string textdata { get; set; }
 
