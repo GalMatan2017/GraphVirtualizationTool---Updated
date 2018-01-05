@@ -5,9 +5,9 @@
         Title="Graph Virtualization Tool" Height="768" Width="1024" x:Name="view"
         MinHeight="480" MinWidth="600"
         >
-    <Grid>
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"  MinWidth="200" />
+            <ColumnDefinition Width="*" MinWidth="100"/>
             <ColumnDefinition Width="5" />
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
