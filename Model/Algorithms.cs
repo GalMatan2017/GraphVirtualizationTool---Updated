@@ -10,13 +10,24 @@ namespace GraphVirtualizationTool.Model
         private int componentlistIndex = 0;
         public bool isBipartite_util<T>(T Graph, int src, int nodes_size, int[] colorArr, int GRAPH_TYPE_FLAG, bool[] discovered, int[] componentlist)
         {
+            List<List<bool>> G = new List<List<bool>>(); ;
+            List<List<int>> graph= new List<List<int>>();
             // Create a color array to store colors assigned to all veritces. Vertex 
             // number is used as index in this array. The value '-1' of  colorArr[i] 
             // is used to indicate that no color is assigned to vertex 'i'.  The value 
             // 1 is used to indicate first color is assigned and value 0 indicates 
             // second color is assigned.
-
-            // Assign first color to source
+            if (GRAPH_TYPE_FLAG == GraphGlobalVariables.MATRIX_FLAG)
+            {
+               
+                G = (List<List<bool>>)Convert.ChangeType(Graph, typeof(List<List<bool>>));
+            }
+            if (GRAPH_TYPE_FLAG == GraphGlobalVariables.LIST_FLAG)
+            {
+              
+                graph = (List<List<int>>)Convert.ChangeType(Graph, typeof(List<List<int>>));
+            }
+                // Assign first color to source
             if (colorArr[src] == -1)
             {
                 colorArr[src] = 1;
@@ -28,7 +39,9 @@ namespace GraphVirtualizationTool.Model
             if (GRAPH_TYPE_FLAG == GraphGlobalVariables.MATRIX_FLAG)
                 q.Enqueue(src);
             else if (GRAPH_TYPE_FLAG == GraphGlobalVariables.LIST_FLAG)
+            {
                 q.Enqueue(src + 1);
+            }
             // Run while there are vertices in queue (Similar to BFS)
             while (q.Count != 0)
             {
@@ -39,8 +52,7 @@ namespace GraphVirtualizationTool.Model
                 // Return false if there is a self-loop 
                 if (GRAPH_TYPE_FLAG == GraphGlobalVariables.MATRIX_FLAG)
                 {
-                    List<List<bool>> G = new List<List<bool>>();
-                    G = (List<List<bool>>)Convert.ChangeType(Graph, typeof(List<List<bool>>));
+                  
                     if (G[u][u] == true)
                         return false;
 
@@ -64,32 +76,24 @@ namespace GraphVirtualizationTool.Model
                 }
                 else if (GRAPH_TYPE_FLAG == GraphGlobalVariables.LIST_FLAG)
                 {
-                    List<List<int>> graph = new List<List<int>>();
-                    graph = (List<List<int>>)Convert.ChangeType(Graph, typeof(List<List<int>>));
-                    int[] level = new int[graph.Count];
-                    int vertex = 0;
-                    for (int i = 1; i < graph[src].Count; i++)
-                    {
-                        vertex = graph[src][i];
-                        // if vertex u is explored for first time
-                        if (!discovered[vertex])
-                        {
-                            // mark it discovered
-                            discovered[vertex] = true;
+                   
+                   // int[] level = new int[graph.Count];
+                   // int vertex = 0;
+                    for (int i =1; i < graph[u-1].Count; i++)
+                    { 
+                            if ( (colorArr[graph[u - 1][i]-1] == -1))
+                            {
+                                // Assign alternate color to this adjacent v of u
+                                colorArr[graph[u - 1][i]-1] = 1 - colorArr[u-1];
+                                componentlist[graph[u - 1][i]-1] = componentlistIndex;
+                                q.Enqueue(graph[u - 1][i]);
 
-                            // set level as level of parent node + 1
-                            level[vertex] = level[u] + 1;
-
-                            // push the vertex into the queue
-                            q.Enqueue(vertex);
-                        }
-                        // if the vertex is already been discovered and
-                        // level of vertex u and v are same, then the 
-                        // graph contains an odd-cycle & is not biparte
-                        else if (level[u] == level[vertex])
-                            return false;
+                            }
+                            else if ( colorArr[graph[u - 1][i]-1] == colorArr[u-1] )
+                                return false;
                     }
                 }
+              
             }
             // If we reach here, then all adjacent vertices can be colored with 
             // alternate color
