@@ -12,7 +12,7 @@ namespace GraphVirtualizationTool
         public GraphController()
         {
             InitializeComponent();
-           
+
         }
 
         private void onOpenGraphFileClickButton(object sender, System.Windows.RoutedEventArgs e)
@@ -23,7 +23,7 @@ namespace GraphVirtualizationTool
             {
                 GraphGlobalVariables.getInstance().FileNamePath = openFileDialog.FileName;
                 GraphGlobalVariables.getInstance().FileName = Path.GetFileName(GraphGlobalVariables.getInstance().FileNamePath);
-                fileName.DataContext = new TextBlockText() { textdata = Path.GetFileName(openFileDialog.FileName) };
+                fileName.DataContext = new GraphInfo() { textdata = Path.GetFileName(openFileDialog.FileName) };
 
                 StreamReader reader = File.OpenText(GraphGlobalVariables.getInstance().FileNamePath);
                 string line;
@@ -36,7 +36,7 @@ namespace GraphVirtualizationTool
                         GraphGlobalVariables.getInstance().FileButtonFlag = GraphGlobalVariables.MATRIX_FLAG;
                     reader.Close();
                 }
-                
+
                 if (GraphGlobalVariables.getInstance().FileButtonFlag == GraphGlobalVariables.MATRIX_FLAG)
                 {
                     _graph = new DenseGraph();
@@ -47,11 +47,14 @@ namespace GraphVirtualizationTool
                     int size = _graph.getGraph<List<List<bool>>>().Count;
 
                     int[] colorArr = new int[size]; // number of vertices to be "colored"
-                    if (aa.isBipartite(_graph.getGraph<List<List<bool>>>(), 0, colorArr))
+                    int[] componentlist = new int[size];// number of vertices which each of vertex represented by the list index and the value is the component class number
+                    if (aa.isBipartite(_graph.getGraph<List<List<bool>>>(), size, colorArr, GraphGlobalVariables.MATRIX_FLAG, componentlist))
                     {
-                        graphType.DataContext = new TextBlockText() { textdata = "Bipartite Graph!" };
+                        graphType.DataContext = new GraphInfo() { textdata = "Bipartite Graph!" };
                     }
-                    Tuple<IEnumerable<Node>, IEnumerable<Edge>> objecta = am.readMatrix(_graph.getGraph<List<List<bool>>>());
+
+
+                    Tuple<IEnumerable<Node>, IEnumerable<Edge>> objecta = am.readMatrix(_graph.getGraph<List<List<bool>>>()/*,colors[]*/);
                     MainViewModel.getInstance().Nodes = new System.Collections.ObjectModel.ObservableCollection<Node>(objecta.Item1);
                     MainViewModel.getInstance().Edges = new System.Collections.ObjectModel.ObservableCollection<Edge>(objecta.Item2);
                 }
@@ -59,21 +62,23 @@ namespace GraphVirtualizationTool
                 if (GraphGlobalVariables.getInstance().FileButtonFlag == GraphGlobalVariables.LIST_FLAG)
                 {
                     _graph = new SparseGraph();
-                    
+
                     AdjacencyList am = new AdjacencyList();
                     _graph.setGraph(am.ParseFile<List<List<int>>>(GraphGlobalVariables.getInstance().FileNamePath));
                     Algorithms aa = new Algorithms();
 
                     int size = _graph.getGraph<List<List<int>>>().Count;
-                    int[] colorArr = new int[size + 1]; // number of vertices to be "colored"
-                    if (aa.isBipartite(_graph.getGraph<List<List<int>>>(), 1, colorArr))
+                    int[] colorArr = new int[size]; // number of vertices to be "colored"
+                    int[] componentlist = new int[size];// number of vertices which each of vertex represented by the list index and the value is the component class number
+
+                    if (aa.isBipartite(_graph.getGraph<List<List<int>>>(), size, colorArr, GraphGlobalVariables.LIST_FLAG, componentlist))
                     {
-                        graphType.DataContext = new TextBlockText() { textdata = "Bipartite Graph!" };
+                        graphType.DataContext = new GraphInfo() { textdata = "Bipartite Graph!" };
                     }
                     Tuple<IEnumerable<Node>, IEnumerable<Edge>> objecta = am.readGraph(_graph.getGraph<List<List<int>>>());
                     MainViewModel.getInstance().Nodes = new System.Collections.ObjectModel.ObservableCollection<Node>(objecta.Item1);
                     MainViewModel.getInstance().Edges = new System.Collections.ObjectModel.ObservableCollection<Edge>(objecta.Item2);
-                    
+
                 }
 
             }

@@ -79,7 +79,7 @@
     <Compile Include="Model\Algorithms.cs" />
     <Compile Include="Model\DenseGraph.cs" />
     <Compile Include="Model\FileHandlerInterface.cs" />
-    <Compile Include="Controller\TextBlockText.cs" />
+    <Compile Include="Controller\GraphInfo.cs" />
     <Page Include="Controller\GraphController.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -97,7 +97,6 @@
     <Compile Include="Model\GraphGlobalVariables.cs" />
     <Compile Include="Model\GraphRealization.cs" />
     <Compile Include="Model\LeftPanelViewModel.cs" />
-    <Compile Include="Model\NodesDataSource.cs" />
     <Compile Include="Model\SparseGraph.cs" />
     <Compile Include="Model\MainViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
