@@ -80,10 +80,6 @@
     <Compile Include="Model\DenseGraph.cs" />
     <Compile Include="Model\FileHandlerInterface.cs" />
     <Compile Include="Controller\TextBlockText.cs" />
-    <Page Include="Controller\EditorStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controller\GraphController.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

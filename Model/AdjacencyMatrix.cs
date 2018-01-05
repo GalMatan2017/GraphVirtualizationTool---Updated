@@ -7,6 +7,19 @@ namespace GraphVirtualizationTool.Model
 {
     class AdjacencyMatrix : FileHandlerInterface
     {
+        public int TryParseInt32(string text, ref int value)
+        {
+            int tmp;
+            if (int.TryParse(text, out tmp))
+            {
+                value = tmp;
+                return 1;
+            }
+            else
+            {
+                return -1; // Leave "value" as it was
+            }
+        }
         public T ParseFile<T>(string filename)
         {
             try
@@ -24,32 +37,27 @@ namespace GraphVirtualizationTool.Model
                 {
                     //split by whitespace
                     string[] items = line.Split(',');
+                    int item = -1;
+                    //convert to integers
+                    List<bool> convertedItems = new List<bool>();
+                    foreach (var integer in items)
+                    {
+                        if (TryParseInt32(integer, ref item) == 1 && (item == 0 || item == 1))
+                            convertedItems.Add(item == 0 ? false : true);
+                        item = -1;
+                    }
                     ++rows;
                     if (!(items.Length > 1))
                         throw new Exception($"Row {rows} is corrupted!");
-                    //convert to integers
-                     
-                    int[] convertedItemsint = Array.ConvertAll(items, int.Parse);
-                    int size =convertedItemsint.Count();
-                    bool[] convertedItems = new bool[size] ;
-                    for(int i = 0; i < size; i++)
-                    {
-                        if (convertedItemsint[i] == 1)
-                            convertedItems[i] = true;
-                        if (convertedItemsint[i] == 0)
-                            convertedItems[i] = false;
-                    }
-                    foreach (var item in convertedItemsint)
-                      
-                        if (item != 0 && item != 1)
-                            throw new Exception($"Found illegal character at row {rows}");
+
                     if (rows == 1)
                     {
                         matrix.Add(convertedItems.ToList());
+
                         //columns constant integer is initiliazed
-                        columns = convertedItems.Length;
+                        columns = convertedItems.Count;
                     }
-                    else if (convertedItems.Length == columns)
+                    else if (convertedItems.Count == columns)
                     {
                         matrix.Add(convertedItems.ToList());
                     }
@@ -57,9 +65,7 @@ namespace GraphVirtualizationTool.Model
                     {
                         throw new Exception($"Row #{rows} is corrupted!");
                     }
-
                 }
-
                 if (columns != rows)
                 {
                     if (rows < columns)
@@ -74,7 +80,6 @@ namespace GraphVirtualizationTool.Model
             {
                 Console.WriteLine(ex.Message);
                 return (T)Convert.ChangeType(new List<List<bool>>(), typeof(T)) ;
-
             }
         }
 
@@ -85,7 +90,7 @@ namespace GraphVirtualizationTool.Model
             List<Edge> edges = new List<Edge>();
             Random random = new Random();
 
-        int rows = matrix.Count;
+            int rows = matrix.Count;
 
             for (int row = 0; row < rows; row++)
                 nodes.Add(new Node() { Name = $"node {row}", X = random.Next(50,500), Y = random.Next(50, 500) });

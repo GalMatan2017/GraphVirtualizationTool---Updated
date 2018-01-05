@@ -4,14 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <ResourceDictionary Source="EditorStyles.xaml"/>
-    </UserControl.Resources>
     <StackPanel>
         <Button Style="{StaticResource RoundCorner}" Click="onOpenGraphFileClickButton" Height="100">
             <TextBlock TextWrapping="Wrap" FontSize="30" ><Run Text="Insert Graph File"/></TextBlock>
         </Button>
-        <TextBlock Name="fileName" FontSize="15" Text="{Binding textdata}" ></TextBlock>
-        <TextBlock Name="graphType" FontSize="15" Text="{Binding textdata}" ></TextBlock>
+        <TextBlock Name="fileName" FontSize="15" Text="{Binding textdata}" HorizontalAlignment="Center" ></TextBlock>
+        <TextBlock Name="graphType" FontSize="15" Text="{Binding textdata}" HorizontalAlignment="Center" ></TextBlock>
     </StackPanel>
 </UserControl>

@@ -8,6 +8,19 @@ namespace GraphVirtualizationTool.Model
 {
     class AdjacencyList : FileHandlerInterface
     {
+        public int TryParseInt32(string text, ref int value)
+        {
+            int tmp;
+            if (int.TryParse(text, out tmp))
+            {
+                value = tmp;
+                return 1;
+            }
+            else
+            {
+                return -1; // Leave "value" as it was
+            }
+        }
 
         public T ParseFile<T>(string filename)
         {
@@ -25,16 +38,25 @@ namespace GraphVirtualizationTool.Model
                 {
                     //split by comma
                     string[] items = line.Split(':', ',');
+                    //split by whitespace
+                    int item = -1;
+                    //convert to integers
+                    List<int> convertedItems = new List<int>();
+                    foreach (var integer in items)
+                    {
+                        if (TryParseInt32(integer, ref item) == 1)
+                            convertedItems.Add(item);
+                        item = -1;
+                    }
                     ++rows;
                     if (!(items.Length > 1))
                         throw new Exception($"Row {rows} is corrupted!");
                     //convert to integers
-                    int[] convertedItems = Array.ConvertAll(items, int.Parse);
                     if (rows == 1)
                     {
                         list.Add(convertedItems.ToList());
                         //columns constant integer is initiliazed
-                        columns = convertedItems.Length;
+                        columns = convertedItems.Count;
                     }
                     else
                     {

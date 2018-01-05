@@ -89,7 +89,6 @@ C:\Users\User\Desktop\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtu
 C:\Users\User\Desktop\GraphVirtualizationTool - Updated\obj\x86\Debug\NodesEditor.exe
 C:\Users\User\Desktop\GraphVirtualizationTool - Updated\obj\x86\Debug\NodesEditor.pdb
 C:\Users\User\Desktop\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtualizationTool.csprojResolveAssemblyReference.cache
-E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\Controller\EditorStyles.baml
 E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\Controller\GraphController.baml
 E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\App.baml
 E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\Controller\GraphController.g.cs
