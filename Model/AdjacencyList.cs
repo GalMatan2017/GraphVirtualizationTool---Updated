@@ -46,7 +46,6 @@ namespace GraphVirtualizationTool.Model
                     {
                         if (TryParseInt32(integer, ref item) == 1)
                             convertedItems.Add(item);
-                        item = -1;
                     }
                     ++rows;
                     if (!(items.Length > 1))

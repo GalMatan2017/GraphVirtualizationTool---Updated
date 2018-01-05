@@ -54,5 +54,21 @@ namespace GraphVirtualizationTool
                 OnPropertyChanged("IsHighlighted");
             }
         }
+
+        //Node ellipse resizing
+
+        private int nodeSize = 50;
+        public int NodeSize
+        {
+            get { return nodeSize; }
+            set
+            {
+                if (value > 0)
+                {
+                    nodeSize = value;
+                    OnPropertyChanged("NodeSize");
+                }
+            }
+        }
     }
 }

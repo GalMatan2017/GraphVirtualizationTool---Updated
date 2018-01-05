@@ -66,7 +66,7 @@ namespace GraphVirtualizationTool.Model
                 {
                     List<List<int>> graph = new List<List<int>>();
                     graph = (List<List<int>>)Convert.ChangeType(Graph, typeof(List<List<int>>));
-                    int[] level = new int[graph.Count];
+                    int[] level = new int[graph.Count+1];
                     int vertex = 0;
                     for (int i = 1; i < graph[src].Count; i++)
                     {

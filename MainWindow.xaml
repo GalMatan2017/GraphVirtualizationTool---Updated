@@ -26,7 +26,7 @@
                     <Thumb.Template>
                         <ControlTemplate TargetType="Thumb">
                             <Canvas Margin="-10,-10,10,10">
-                                <Ellipse Height="20" Width="20" Stroke="Black" StrokeThickness="1" Fill="Azure"
+                                <Ellipse Height="{Binding NodeSize}" Width="{Binding NodeSize}" Stroke="Black" StrokeThickness="1" Fill="Azure"
                                              x:Name="Ellipse">
 
                                 </Ellipse>

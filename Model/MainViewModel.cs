@@ -114,7 +114,7 @@ namespace GraphVirtualizationTool
 
         #region Scrolling support
 
-        private double _areaHeight = 768;
+        private double _areaHeight = 480;
         public double AreaHeight
         {
             get { return _areaHeight; }
@@ -125,7 +125,7 @@ namespace GraphVirtualizationTool
             }
         }
 
-        private double _areaWidth = 1024;
+        private double _areaWidth = 640;
         public double AreaWidth
         {
             get { return _areaWidth; }
@@ -135,7 +135,8 @@ namespace GraphVirtualizationTool
                 OnPropertyChanged("AreaWidth");
             }
         }
-       
+
         #endregion
+
     }
 }

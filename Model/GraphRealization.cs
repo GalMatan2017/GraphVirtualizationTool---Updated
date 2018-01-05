@@ -9,7 +9,6 @@ namespace GraphVirtualizationTool.Model
     {
         public static Tuple<IEnumerable<Node>, IEnumerable<Edge>> draw<T>(List<List<T>> graph)
         {
-
             List<Node> nodes = new List<Node>();
             List<Edge> edges = new List<Edge>();
             Random random = new Random();
@@ -22,7 +21,7 @@ namespace GraphVirtualizationTool.Model
                     nodes.Add(
                         new Node()
                         {
-                            Name = $"node {row}",
+                            Name = $"node {row+1}",
                             X = random.Next(50, 500),
                             Y = random.Next(50, 500)
                         });
@@ -37,7 +36,7 @@ namespace GraphVirtualizationTool.Model
                             edges.Add(new Edge()
                             {
                                 Name = $"connector {new Random().Next(999)}",
-                                Start = nodes.Single(x => x.Name.Equals($"node {row}")),
+                                Start = nodes.Single(x => x.Name.Equals($"node {row+1}")),
                                 End = nodes.Single(x => x.Name.Equals($"node {col}"))
                             });
                         }
