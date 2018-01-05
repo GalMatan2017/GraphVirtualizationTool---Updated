@@ -106,3 +106,4 @@ E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphV
 E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtualizationTool.csproj.GenerateResource.Cache
 E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtualizationTool.exe
 E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtualizationTool.pdb
+E:\תל חי\פרויקט\GraphVirtualizationTool - Updated\obj\x86\Debug\GraphVirtualizationTool.csprojResolveAssemblyReference.cache

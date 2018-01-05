@@ -5,178 +5,162 @@
         Title="Graph Virtualization Tool" Height="768" Width="1024" x:Name="view"
         MinHeight="480" MinWidth="600"
         >
-    
-    <DockPanel Background="#FFF8F8FF">
-        <Border x:Name="border" CornerRadius="3" BorderBrush="Black" BorderThickness="2">
-        <Grid  Background="LightCyan" Width="143" DockPanel.Dock="Left" Margin="5,0,0,0.5" VerticalAlignment="Stretch" RenderTransformOrigin="0.451,0.498">
-            <!--MENU-->
-            <local:GraphController Margin="-6,220,0,49" Height="Auto"  />
-            <!--MENU-->
-        </Grid>
-        </Border>
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <!-- This CompositeCollection basically Concatenates the Nodes and Connectors in a single one -->
+            <CompositeCollection x:Key="Col">
+                <CollectionContainer Collection="{Binding DataContext.Edges,Source={x:Reference view}}"/>
+                <CollectionContainer Collection="{Binding DataContext.Nodes,Source={x:Reference view}}"/>
+            </CompositeCollection>
 
-
-
-        <Grid  Background="#FFF8F8FF"  Margin="10">
-           
-            <Grid.Resources>
-                <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-                <!-- This CompositeCollection basically Concatenates the Nodes and Connectors in a single one -->
-                <CompositeCollection x:Key="Col">
-                    <CollectionContainer Collection="{Binding DataContext.Edges,Source={x:Reference view}}"/>
-                    <CollectionContainer Collection="{Binding DataContext.Nodes,Source={x:Reference view}}"/>
-                </CompositeCollection>
-
-                <!-- This is the DataTemplate that will be used to render the Node class -->
-                <DataTemplate DataType="{x:Type local:Node}">
-                    <Thumb DragDelta="Thumb_Drag" 
+            <!-- This is the DataTemplate that will be used to render the Node class -->
+            <DataTemplate DataType="{x:Type local:Node}">
+                <Thumb DragDelta="Thumb_Drag" 
                            IsEnabled="{Binding IsSelected,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}">
-                        <Thumb.Template>
-                            <ControlTemplate TargetType="Thumb">
-                                <Canvas Margin="-10,-10,10,10">
-                                    <Ellipse Height="20" Width="20" Stroke="Black" StrokeThickness="1" Fill="Azure"
+                    <Thumb.Template>
+                        <ControlTemplate TargetType="Thumb">
+                            <Canvas Margin="-10,-10,10,10">
+                                <Ellipse Height="20" Width="20" Stroke="Black" StrokeThickness="1" Fill="Azure"
                                              x:Name="Ellipse">
 
-                                    </Ellipse>
-                                    <TextBlock Canvas.Top="-20" Canvas.Left="-40" Width="100" 
+                                </Ellipse>
+                                <TextBlock Canvas.Top="-20" Canvas.Left="-40" Width="100" 
                                                TextAlignment="Center" Text="{Binding Name}" FontWeight="Bold"
                                                IsHitTestVisible="False"
                                                Visibility="{Binding DataContext.ShowNames, 
                                                                     RelativeSource={RelativeSource FindAncestor, AncestorType=Window},
                                                                     Converter={StaticResource BoolToVisibilityConverter}}"/>
 
-                                    <TextBlock Canvas.Left="30" Canvas.Top="10"
+                                <TextBlock Canvas.Left="30" Canvas.Top="10"
                                                Text="{Binding X, StringFormat='{}X = {0}'}"
                                                IsHitTestVisible="False"
                                                Visibility="Collapsed" x:Name="XText"/>
 
-                                    <TextBlock Canvas.Left="30" Canvas.Top="25"
+                                <TextBlock Canvas.Left="30" Canvas.Top="25"
                                                Text="{Binding Y, StringFormat='{}Y = {0}'}"
                                                IsHitTestVisible="False"
                                                Visibility="Collapsed" x:Name="YText"/>
-                                </Canvas>
-                                <ControlTemplate.Triggers>
-                                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" Value="True">
-                                        <Setter TargetName="Ellipse" Property="Fill" Value="Red"/>
-                                    </DataTrigger>
-                                    <Trigger Property="IsDragging" Value="True">
-                                        <Setter TargetName="Ellipse" Property="Fill" Value="Green"/>
-                                    </Trigger>
-                                    <DataTrigger Binding="{Binding DataContext.ShowAllCoordinates, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Value="True">
-                                        <Setter TargetName="XText" Property="Visibility" Value="Visible"/>
-                                        <Setter TargetName="YText" Property="Visibility" Value="Visible"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding IsHighlighted}" Value="True">
-                                        <Setter TargetName="Ellipse" Property="StrokeThickness" Value="2"/>
-                                        <Setter TargetName="Ellipse" Property="Stroke" Value="Red"/>
-                                        <Setter TargetName="Ellipse" Property="Fill" Value="White"/>
-                                    </DataTrigger>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" Value="True"/>
-                                            <Condition Binding="{Binding DataContext.ShowCurrentCoordinates, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Value="True"/>
-                                        </MultiDataTrigger.Conditions>
-                                        <Setter TargetName="XText" Property="Visibility" Value="Visible"/>
-                                        <Setter TargetName="YText" Property="Visibility" Value="Visible"/>
-                                    </MultiDataTrigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Thumb.Template>
-                    </Thumb>
-                </DataTemplate>
+                            </Canvas>
+                            <ControlTemplate.Triggers>
+                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" Value="True">
+                                    <Setter TargetName="Ellipse" Property="Fill" Value="Red"/>
+                                </DataTrigger>
+                                <Trigger Property="IsDragging" Value="True">
+                                    <Setter TargetName="Ellipse" Property="Fill" Value="Green"/>
+                                </Trigger>
+                                <DataTrigger Binding="{Binding DataContext.ShowAllCoordinates, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Value="True">
+                                    <Setter TargetName="XText" Property="Visibility" Value="Visible"/>
+                                    <Setter TargetName="YText" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsHighlighted}" Value="True">
+                                    <Setter TargetName="Ellipse" Property="StrokeThickness" Value="2"/>
+                                    <Setter TargetName="Ellipse" Property="Stroke" Value="Red"/>
+                                    <Setter TargetName="Ellipse" Property="Fill" Value="White"/>
+                                </DataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" Value="True"/>
+                                        <Condition Binding="{Binding DataContext.ShowCurrentCoordinates, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Value="True"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter TargetName="XText" Property="Visibility" Value="Visible"/>
+                                    <Setter TargetName="YText" Property="Visibility" Value="Visible"/>
+                                </MultiDataTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Thumb.Template>
+                </Thumb>
+            </DataTemplate>
 
-                <!-- This is the DataTemplate that will be used to render the Connector class -->
-                <DataTemplate DataType="{x:Type local:Edge}">
-                    <Line Stroke="Blue" StrokeThickness="3"
+            <!-- This is the DataTemplate that will be used to render the Connector class -->
+            <DataTemplate DataType="{x:Type local:Edge}">
+                <Line Stroke="Blue" StrokeThickness="3"
                             X1="{Binding Start.X}" Y1="{Binding Start.Y}"
                             X2="{Binding End.X}" Y2="{Binding End.Y}" x:Name="Line"/>
-                    <DataTemplate.Triggers>
-                        <DataTrigger Binding="{Binding End}" Value="{x:Null}">
-                            <Setter TargetName="Line" Property="Visibility" Value="Collapsed"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" Value="True">
-                            <Setter TargetName="Line" Property="Stroke" Value="Red"/>
-                            <Setter TargetName="Line" Property="StrokeDashArray" Value="2 3"/>
-                            <DataTrigger.EnterActions>
-                                <BeginStoryboard x:Name="DashAnimation">
-                                    <Storyboard Duration="00:00:01" RepeatBehavior="Forever">
-                                        <DoubleAnimation From="0" To="20" Storyboard.TargetName="Line" Storyboard.TargetProperty="StrokeDashOffset"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </DataTrigger.EnterActions>
-                            <DataTrigger.ExitActions>
-                                <StopStoryboard BeginStoryboardName="DashAnimation"/>
-                            </DataTrigger.ExitActions>
-                        </DataTrigger>
-                    </DataTemplate.Triggers>
-                </DataTemplate>
-            </Grid.Resources>
-            
-            <ListBox  SelectedItem="{Binding SelectedObject}" 
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding End}" Value="{x:Null}">
+                        <Setter TargetName="Line" Property="Visibility" Value="Collapsed"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" Value="True">
+                        <Setter TargetName="Line" Property="Stroke" Value="Red"/>
+                        <Setter TargetName="Line" Property="StrokeDashArray" Value="2 3"/>
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard x:Name="DashAnimation">
+                                <Storyboard Duration="00:00:01" RepeatBehavior="Forever">
+                                    <DoubleAnimation From="0" To="20" Storyboard.TargetName="Line" Storyboard.TargetProperty="StrokeDashOffset"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
+                            <StopStoryboard BeginStoryboardName="DashAnimation"/>
+                        </DataTrigger.ExitActions>
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+        </Grid.Resources>
+        
+        <!-- Here comes the components -->
+        <local:GraphController VerticalAlignment="Center" Margin="10" Grid.Column="0"/>
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+        <ListBox  Grid.Column="2" SelectedItem="{Binding SelectedObject}" 
                      PreviewMouseMove="ListBox_PreviewMouseMove"
-                     PreviewMouseDown="ListBox_PreviewMouseDown" Margin="0,0,0,0.5">
-               
-                <ListBox.Template>
-                    <ControlTemplate>
-                        <Border x:Name="borsder" CornerRadius="3" BorderBrush="Black" BorderThickness="2" Margin="-12,-10,-8,-10">
-                            <Border.Background>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" Opacity=".3">
-                                    <GradientStop Color="White" Offset="0"/>
-                                    <GradientStop Color="GhostWhite" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Border.Background>
+                     PreviewMouseDown="ListBox_PreviewMouseDown">
+            <ListBox.Template>
+                <ControlTemplate>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <Border>
+                            <!-- This Border serves as a background and the VisualBrush used to paint its background serves as the "Snapping Grid" -->
+                            <!-- The "Snapping" Actually occurs in the Node class (see Node.X and Node.Y properties), it has nothing to do with any UI Elements -->
 
-                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                                <Border>
-                                    <!-- This Border serves as a background and the VisualBrush used to paint its background serves as the "Snapping Grid" -->
-                                    <!-- The "Snapping" Actually occurs in the Node class (see Node.X and Node.Y properties), it has nothing to do with any UI Elements -->
-
-                                    <ItemsPresenter/>
-                                </Border>
-                            </ScrollViewer>
+                            <ItemsPresenter/>
                         </Border>
-                    </ControlTemplate>
-                </ListBox.Template>
-                <ListBox.ItemsSource>
-                    <StaticResource ResourceKey="Col"/>
-                </ListBox.ItemsSource>
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas IsItemsHost="True" Background="#01FFFFFF" 
+                    </ScrollViewer>
+                </ControlTemplate>
+            </ListBox.Template>
+            <ListBox.ItemsSource>
+                <StaticResource ResourceKey="Col"/>
+            </ListBox.ItemsSource>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas IsItemsHost="True" Background="#01FFFFFF" 
                                 Height="{Binding AreaHeight}" Width="{Binding AreaWidth}"
                                 VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="Canvas.Left" Value="{Binding X}"/>
-                        <Setter Property="Canvas.Top" Value="{Binding Y}"/>
-                        <Setter Property="FocusVisualStyle" Value="{StaticResource EmptyFocusVisualStyle}"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ListBoxItem">
-                                    <ContentPresenter x:Name="Content"/>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsSelected" Value="True">
-                                            <Setter TargetName="Content" Property="Effect">
-                                                <Setter.Value>
-                                                    <DropShadowEffect Color="Blue"  ShadowDepth="0" BlurRadius="5"/>
-                                                    <!--controls the node's shadow-->
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Trigger>
-                                        <DataTrigger Binding="{Binding IsNew}" Value="True">
-                                            <Setter Property="Opacity" Value=".5"/>
-                                        </DataTrigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
-        </Grid>
-    </DockPanel>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                    <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                    <Setter Property="FocusVisualStyle" Value="{StaticResource EmptyFocusVisualStyle}"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter x:Name="Content"/>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Content" Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect Color="Blue"  ShadowDepth="0" BlurRadius="5"/>
+                                                <!--controls the node's shadow-->
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <DataTrigger Binding="{Binding IsNew}" Value="True">
+                                        <Setter Property="Opacity" Value=".5"/>
+                                    </DataTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+    </Grid>
 </Window>
 
     

@@ -3,21 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" d:DesignWidth="300" Height="449.63">
+             mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary Source="EditorStyles.xaml"/>
     </UserControl.Resources>
-    <StackPanel Background="LightCyan">
-      
-            <Button Style="{StaticResource RoundCorner}" Click="onOpenGraphFileClickButton" Background="White" Height="164">
-            <TextBlock  TextWrapping="Wrap"  FontSize="30" ><Run Text="   Insert Graph File"/></TextBlock>
+    <StackPanel>
+        <Button Style="{StaticResource RoundCorner}" Click="onOpenGraphFileClickButton" Height="100">
+            <TextBlock TextWrapping="Wrap" FontSize="30" ><Run Text="Insert Graph File"/></TextBlock>
         </Button>
-        
-
-
         <TextBlock Name="fileName" FontSize="15" Text="{Binding textdata}" ></TextBlock>
         <TextBlock Name="graphType" FontSize="15" Text="{Binding textdata}" ></TextBlock>
-
-
     </StackPanel>
 </UserControl>
