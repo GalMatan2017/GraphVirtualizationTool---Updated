@@ -8,7 +8,9 @@ namespace GraphVirtualizationTool.Model
     class Algorithms
     {
         private int componentlistIndex = 0;
-        public bool isBipartite_util<T>(T Graph, int src, int nodes_size, int[] colorArr, int GRAPH_TYPE_FLAG, bool[] discovered, int[] componentlist)
+        private bool bipartiteflag;
+        private bool isConnectedflag;
+        public bool isBipartite_util<T>(T Graph, int src, int nodes_size, int[] colorArr, int GRAPH_TYPE_FLAG, int[] componentlist)
         {
             List<List<bool>> G = new List<List<bool>>(); ;
             List<List<int>> graph= new List<List<int>>();
@@ -30,6 +32,7 @@ namespace GraphVirtualizationTool.Model
                 // Assign first color to source
             if (colorArr[src] == -1)
             {
+
                 colorArr[src] = 1;
                 componentlist[src] = componentlistIndex;
             }
@@ -104,142 +107,43 @@ namespace GraphVirtualizationTool.Model
             bool[] discovered = new bool[nodes_size + 1];
             for (int i = 0; i < nodes_size; ++i)
                 colorArr[i] = -1;
-
+            isConnectedflag = true;
+            bipartiteflag = true;
             for (int i = 0; i < nodes_size; i++)
             {
                 if (colorArr[i] == -1)
                 {
                     componentlistIndex++;
-                    if (!isBipartite_util(G, i, nodes_size, colorArr, GRAPH_TYPE_FLAG, discovered, componentlist))
-                        return false;
-                }
-            }
-            return true;
-        }
-
-        public bool isConnected(List<List<int>> graph, int v)
-        {
-            // stores vertex is discovered or not
-            bool[] discovered = new bool[graph.Count + 1];
-
-            // stores level of each vertex in BFS
-            int[] level = new int[graph.Count + 1];
-
-            // mark source vertex as discovered and 
-            // set its level to 0
-            discovered[v] = true;
-            level[v] = 0;
-
-            // create a queue to do BFS and enqueue 
-            // source vertex in it
-            Queue<int> q = new Queue<int>();
-            q.Enqueue(v);
-
-            // run till queue is not empty
-            while (q.Count != 0)
-            {
-                // pop front node from the queue
-                v = q.Peek();
-                q.Dequeue();
-
-                // do for every edge (v -> u)
-                int u = 0;
-                for (int i = 1; i < graph[v - 1].Count; i++)
-                {
-                    u = graph[v - 1][i];
-                    // if vertex u is explored for first time
-                    if (!discovered[u])
+                    if (!isBipartite_util(G, i, nodes_size, colorArr, GRAPH_TYPE_FLAG, componentlist))
                     {
-                        // mark it discovered
-                        discovered[u] = true;
-
-                        // set level as level of parent node + 1
-                        level[u] = level[v] + 1;
-
-                        // push the vertex into the queue
-                        q.Enqueue(u);
+                        bipartiteflag = false;
+                        if (i == 0)
+                        {
+                            for (int j = 0; j < nodes_size; ++j)
+                            {
+                                if (colorArr[j] == -1)
+                                    isConnectedflag = false;
+                            }
+                        }
+                       
                     }
-
-                    // if the vertex is already been discovered and
-                    // level of vertex u and v are same, then the 
-                    // graph contains an odd-cycle & is not biparte
-                    else if (level[v] == level[u])
-                        return false;
+                   
+                       
                 }
             }
-
-            for (int i = 1; i < discovered.Length; i++)
-            {
-                if (discovered[i] == false)
-                {
-                    return false;
-                }
-            }
-            return true;
-
+            if (bipartiteflag == true)
+                return true;
+            else
+                return false;
         }
 
-        /* public bool isConnected(List<List<bool>> graph, int v)
-         {
-             // stores vertex is discovered or not
-             bool[] discovered = new bool[graph.Count + 1];
 
-             // stores level of each vertex in BFS
-             int[] level = new int[graph.Count + 1];
 
-             // mark source vertex as discovered and 
-             // set its level to 0
-             discovered[v] = true;
-             level[v] = 0;
-
-             // create a queue to do BFS and enqueue 
-             // source vertex in it
-             Queue<int> q = new Queue<int>();
-             q.Enqueue(v);
-
-             // run till queue is not empty
-             while (q.Count != 0)
-             {
-                 // pop front node from the queue
-                 v = q.Peek();
-                 q.Dequeue();
-
-                 // do for every edge (v -> u)
-                 int u = 0;
-                 for (int i = 1; i < graph[v - 1].Count; i++)
-                 {
-                     u = graph[v - 1][i];
-                     // if vertex u is explored for first time
-                     if (!discovered[u])
-                     {
-                         // mark it discovered
-                         discovered[u] = true;
-
-                         // set level as level of parent node + 1
-                         level[u] = level[v] + 1;
-
-                         // push the vertex into the queue
-                         q.Enqueue(u);
-                     }
-
-                     // if the vertex is already been discovered and
-                     // level of vertex u and v are same, then the 
-                     // graph contains an odd-cycle & is not biparte
-                     else if (level[v] == level[u])
-                         return false;
-                 }
-             }
-
-             for (int i = 1; i < discovered.Length; i++)
-             {
-                 if (discovered[i] == false)
-                 {
-                     return false;
-                 }
-             }
-             return true;
-
-         }*/
+        /*must run bipartite function first*/
+        public bool isConnected()
+        {
+            return bipartiteflag;
+        }
 
     }
 }
