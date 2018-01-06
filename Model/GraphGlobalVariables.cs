@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace GraphVirtualizationTool
 {
-    public class GraphGlobalVariables
+    public class GraphGlobalVariables : INotifyPropertyChanged
     {
+        public enum GraphTypes { Dense, Sparse }
         private GraphGlobalVariables() { }
 
         private static GraphGlobalVariables instance = null;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public static GraphGlobalVariables getInstance()
         {
             if (instance == null)
@@ -19,15 +23,37 @@ namespace GraphVirtualizationTool
             }
             return instance;
         }
-        
-        public  string FileNamePath { get; set; }
-        public  string FileName{ get; set; }
-        public  int graphTypeFlag { get; set; }
-        public  int FileButtonFlag { get; set; }
+        private string _filename { get; set; }
+        private string _graphinfo { get; set; }
+        public string Filepath { get; set; }
+        public string Filename
+        {
+            get
+            {
+                return _filename;
+            }
+            set
+            {
+                if (value != null)
+                    _filename = value;
+                OnPropertyChanged("Filename");
+            }
+        }
+        public GraphTypes GraphType { get; set; }
 
-        public const int MATRIX_FLAG = 4;
-
-        public const int LIST_FLAG = 5;
+        public string GraphInfo
+        {
+            get
+            {
+                return _graphinfo;
+            }
+            set
+            {
+                if (value != null)
+                    _graphinfo = value;
+                OnPropertyChanged("GraphInfo");
+            }
+        }
 
     }
 }

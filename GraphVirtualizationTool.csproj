@@ -79,7 +79,6 @@
     <Compile Include="Model\Algorithms.cs" />
     <Compile Include="Model\DenseGraph.cs" />
     <Compile Include="Model\FileHandlerInterface.cs" />
-    <Compile Include="Controller\GraphInfo.cs" />
     <Page Include="Controller\GraphController.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

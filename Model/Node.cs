@@ -1,30 +1,36 @@
 using System;
 namespace GraphVirtualizationTool
 {
-    public class Node: DiagramObject
+    public class Node : DiagramObject
     {
+
         private double _x;
         public override double X
         {
             get { return _x; }
             set
             {
-                //"Grid Snapping"
-                //this actually "rounds" the value so that it will always be a multiple of 50.
-                _x = value;
+                if (value > MainViewModel.getInstance().CanvasWidth)
+                    _x = MainViewModel.getInstance().CanvasWidth;
+                else if (value < 0)
+                    _x = 0;
+                else
+                    _x = value;
                 OnPropertyChanged("X");
             }
         }
-
         private double _y;       
         public override double Y
         {
             get { return _y; }
             set
             {
-                //"Grid Snapping"
-                //this actually "rounds" the value so that it will always be a multiple of 50.
-                _y = value;
+                if (value > MainViewModel.getInstance().CanvasHeight)
+                    _y = MainViewModel.getInstance().CanvasHeight;
+                else if (value < 0)
+                    _y = 0;
+                else
+                    _y = value;
                 OnPropertyChanged("Y");
             }
         }
@@ -34,13 +40,10 @@ namespace GraphVirtualizationTool
             get { return _z; }
             set
             {
-                //"Grid Snapping"
-                //this actually "rounds" the value so that it will always be a multiple of 50.
                 _z = value;
                 OnPropertyChanged("Z");
             }
         }
-
         private bool _isHighlighted { get; set; }
         public bool IsHighlighted
         {
@@ -54,10 +57,8 @@ namespace GraphVirtualizationTool
                 OnPropertyChanged("IsHighlighted");
             }
         }
-
         //Node ellipse resizing
-
-        private int nodeSize = 50;
+        public static int nodeSize = 30;
         public int NodeSize
         {
             get { return nodeSize; }

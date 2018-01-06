@@ -9,11 +9,8 @@ namespace GraphVirtualizationTool
     public class MainViewModel: INotifyPropertyChanged
     {
         private MainViewModel() {
-
             ShowNames = true;
-
         }
-
         private static MainViewModel instance = null;
         public static MainViewModel getInstance()
         {
@@ -23,9 +20,7 @@ namespace GraphVirtualizationTool
                 }
                 return instance;
         }
-
         #region Collections
-
         private ObservableCollection<Node> _nodes;
         public ObservableCollection<Node> Nodes
         {
@@ -39,7 +34,6 @@ namespace GraphVirtualizationTool
                 }
             }
         }
-
         private ObservableCollection<Edge> _edges;
         public ObservableCollection<Edge> Edges
         {
@@ -54,7 +48,6 @@ namespace GraphVirtualizationTool
             }
         }
         private DiagramObject _selectedObject;
-
         public DiagramObject SelectedObject
         {
             get
@@ -64,12 +57,9 @@ namespace GraphVirtualizationTool
             set
             {
                 Nodes.ToList().ForEach(x => x.IsHighlighted = false);
-
                 _selectedObject = value;
                 OnPropertyChanged("SelectedObject");
-
                 //DeleteCommand.IsEnabled = value != null;
-
                 var connector = value as Edge;
                 if (connector != null)
                 {
@@ -79,14 +69,10 @@ namespace GraphVirtualizationTool
                     if (connector.End != null)
                         connector.End.IsHighlighted = true;
                 }
-
             }
         }
-
         #endregion
-
         #region Bool (Visibility) Options
-
         private bool _showNames;
         public bool ShowNames
         {
@@ -97,46 +83,35 @@ namespace GraphVirtualizationTool
                 OnPropertyChanged("ShowNames");
             }
         }
-
         #endregion
-
         #region INotifyPropertyChanged
-
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
         #endregion
-
-
         #region Scrolling support
-
-        private double _areaHeight = 480;
-        public double AreaHeight
+        private int _canvasHeight = 100;
+        public int CanvasHeight
         {
-            get { return _areaHeight; }
+            get { return _canvasHeight; }
             set
             {
-                _areaHeight = value;
-                OnPropertyChanged("AreaHeight");
+                _canvasHeight = value;
+                OnPropertyChanged("CanvasHeight");
             }
         }
-
-        private double _areaWidth = 640;
-        public double AreaWidth
+        private int _canvasWidth = 100;
+        public int CanvasWidth
         {
-            get { return _areaWidth; }
+            get { return _canvasWidth; }
             set
             {
-                _areaWidth = value;
-                OnPropertyChanged("AreaWidth");
+                _canvasWidth = value;
+                OnPropertyChanged("CanvasWidth");
             }
         }
-
         #endregion
-
     }
 }

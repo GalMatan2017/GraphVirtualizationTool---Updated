@@ -8,7 +8,7 @@
         <Button Style="{StaticResource RoundCorner}" Click="onOpenGraphFileClickButton" Height="100">
             <TextBlock TextWrapping="Wrap" FontSize="20" ><Run Text="Insert Graph File"/></TextBlock>
         </Button>
-        <TextBlock Name="fileName" FontSize="15" Text="{Binding textdata}" HorizontalAlignment="Center" ></TextBlock>
-        <TextBlock Name="graphType" FontSize="15" Text="{Binding textdata}" HorizontalAlignment="Center" ></TextBlock>
+        <TextBlock Name="fileName" FontSize="15" Text="{Binding Filename}" HorizontalAlignment="Center" ></TextBlock>
+        <TextBlock Name="graphInfo" FontSize="15" Text="{Binding GraphInfo}" HorizontalAlignment="Center" ></TextBlock>
     </StackPanel>
 </UserControl>

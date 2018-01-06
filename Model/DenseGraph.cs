@@ -9,7 +9,6 @@ namespace GraphVirtualizationTool.Model
     {
         private List<List<bool>> _matrix;
         private List<int> templist = new List<int>();
-
         public string TypeName
         {
             get
@@ -22,35 +21,23 @@ namespace GraphVirtualizationTool.Model
                 throw new NotImplementedException();
             }
         }
-
-        
-        
-        public  TValue getGraph<TValue>()
+        public List<List<TValue>> getGraph<TValue>()
         {
-
-            return (TValue)Convert.ChangeType(_matrix, typeof(TValue));
-
+            return (List<List<TValue>>)Convert.ChangeType(_matrix, typeof(List<List<TValue>>));
         }
-
         public void setGraph<TValue>(TValue graph)
         {
             _matrix = new List<List<bool>>();
             _matrix = (List<List<bool>>)Convert.ChangeType(graph, typeof(List<List<bool>>));
         }
-
-        List<int> Graph.getNeighbors(int node)
+        List<int> Graph.getNeighbours(int node)
         {
-            
             for(int i = 0; i < _matrix.Count; i++)
             {
                 if(_matrix[node-1][i] == true)
                     templist.Add( i+1);
-
             }
             return templist;
         }
-
-        
-
     }
 }

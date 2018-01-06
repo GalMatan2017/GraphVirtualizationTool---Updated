@@ -20,7 +20,7 @@ namespace GraphVirtualizationTool.Model
                 return -1; // Leave "value" as it was
             }
         }
-        public T ParseFile<T>(string filename)
+        public List<List<T>> ParseFile<T>(string filename)
         {
             try
             {
@@ -52,7 +52,6 @@ namespace GraphVirtualizationTool.Model
                     if (rows == 1)
                     {
                         matrix.Add(convertedItems.ToList());
-
                         //columns constant integer is initiliazed
                         columns = convertedItems.Count;
                     }
@@ -73,12 +72,12 @@ namespace GraphVirtualizationTool.Model
                         throw new Exception("rows is bigger than columns");
                 }
                 reader.Close();
-                return (T)Convert.ChangeType(matrix, typeof(T)) ;
+                return (List<List<T>>)Convert.ChangeType(matrix, typeof(List<List<T>>)) ;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return (T)Convert.ChangeType(new List<List<bool>>(), typeof(T)) ;
+                return (List<List<T>>)Convert.ChangeType(new List<List<bool>>(), typeof(List<List<T>>)) ;
             }
         }
     }

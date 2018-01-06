@@ -5,14 +5,10 @@ namespace GraphVirtualizationTool.Model
 {
     interface  Graph
     {  
-         string TypeName { get; set; }
-
-        TValue getGraph<TValue>();
-
+        string TypeName { get; set; }
+        List<List<TValue>> getGraph<TValue>();
         void setGraph<TValue>(TValue graph);
-
-
-        List<int> getNeighbors(int node);
+        List<int> getNeighbours(int node);
     }
 
 }

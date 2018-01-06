@@ -8,10 +8,15 @@ namespace GraphVirtualizationTool
 {
     public partial class GraphController : UserControl
     {
-        Graph _graph;
+        Graph graph;
+        GraphGlobalVariables globals;
+        Algorithms algorithms = new Algorithms();
+
         public GraphController()
         {
             InitializeComponent();
+            globals = GraphGlobalVariables.getInstance();
+            algorithms = new Algorithms();
 
         }
 
@@ -21,59 +26,65 @@ namespace GraphVirtualizationTool
             openFileDialog.Filter = "Text files (*.txt)|*.txt";
             if (openFileDialog.ShowDialog() == true)
             {
-                GraphGlobalVariables.getInstance().FileNamePath = openFileDialog.FileName;
-                GraphGlobalVariables.getInstance().FileName = Path.GetFileName(GraphGlobalVariables.getInstance().FileNamePath);
-                fileName.DataContext = new GraphInfo() { textdata = Path.GetFileName(openFileDialog.FileName) };
+                globals.Filepath = openFileDialog.FileName;
+                globals.Filename = Path.GetFileName(globals.Filepath);
 
-                StreamReader reader = File.OpenText(GraphGlobalVariables.getInstance().FileNamePath);
+                StreamReader reader = File.OpenText(globals.Filepath);
                 string line;
                 if ((line = reader.ReadLine()) != null)
                 {
                     if (line.Contains(":"))
-                        GraphGlobalVariables.getInstance().FileButtonFlag = GraphGlobalVariables.LIST_FLAG;
-
-                    if (line.StartsWith("0,") || line.StartsWith("1,"))
-                        GraphGlobalVariables.getInstance().FileButtonFlag = GraphGlobalVariables.MATRIX_FLAG;
+                        globals.GraphType = GraphGlobalVariables.GraphTypes.Sparse;
+                    else
+                        globals.GraphType = GraphGlobalVariables.GraphTypes.Dense;
                     reader.Close();
                 }
 
-                if (GraphGlobalVariables.getInstance().FileButtonFlag == GraphGlobalVariables.MATRIX_FLAG)
+                if (globals.GraphType == GraphGlobalVariables.GraphTypes.Dense)
                 {
-                    _graph = new DenseGraph();
-
+                    graph = new DenseGraph();
                     AdjacencyMatrix am = new AdjacencyMatrix();
-                    _graph.setGraph(am.ParseFile<List<List<bool>>>(GraphGlobalVariables.getInstance().FileNamePath));
-                    Algorithms aa = new Algorithms();
-                    int size = _graph.getGraph<List<List<bool>>>().Count;
 
+                    graph.setGraph(am.ParseFile<bool>(globals.Filepath));
+
+                    int size = graph.getGraph<bool>().Count;
                     int[] colorArr = new int[size]; // number of vertices to be "colored"
                     int[] componentlist = new int[size];// number of vertices which each of vertex represented by the list index and the value is the component class number
-                    if (aa.isBipartite(_graph.getGraph<List<List<bool>>>(), size, colorArr, GraphGlobalVariables.MATRIX_FLAG, componentlist))
+
+                    if (algorithms.isBipartite(graph.getGraph<bool>(), size, colorArr, GraphGlobalVariables.GraphTypes.Dense, componentlist))
                     {
-                        graphType.DataContext = new GraphInfo() { textdata = "Bipartite Graph!" };
+                        globals.GraphInfo = "Bipartite!";
                     }
-                    GraphRealization.draw(_graph.getGraph<List<List<bool>>>());
+                    else
+                    {
+                        globals.GraphInfo = "";
+                    }
+                    GraphRealization.draw(graph.getGraph<bool>());
                 }
 
-                if (GraphGlobalVariables.getInstance().FileButtonFlag == GraphGlobalVariables.LIST_FLAG)
+                else
                 {
-                    _graph = new SparseGraph();
-
+                    graph = new SparseGraph();
                     AdjacencyList am = new AdjacencyList();
-                    _graph.setGraph(am.ParseFile<List<List<int>>>(GraphGlobalVariables.getInstance().FileNamePath));
-                    Algorithms aa = new Algorithms();
 
-                    int size = _graph.getGraph<List<List<int>>>().Count;
+                    graph.setGraph(am.ParseFile<int>(globals.Filepath));
+
+                    int size = graph.getGraph<int>().Count;
                     int[] colorArr = new int[size]; // number of vertices to be "colored"
                     int[] componentlist = new int[size];// number of vertices which each of vertex represented by the list index and the value is the component class number
 
-                    if (aa.isBipartite(_graph.getGraph<List<List<int>>>(), size, colorArr, GraphGlobalVariables.LIST_FLAG, componentlist))
+                    if (algorithms.isBipartite(graph.getGraph<int>(), size, colorArr, GraphGlobalVariables.GraphTypes.Sparse, componentlist))
                     {
-                        graphType.DataContext = new GraphInfo() { textdata = "Bipartite Graph!" };
+                        globals.GraphInfo = "Bipartite!";
                     }
-                    GraphRealization.draw(_graph.getGraph<List<List<int>>>());
+                    else
+                    {
+                        globals.GraphInfo = "";
+                    }
+                    GraphRealization.draw(graph.getGraph<int>());
                 }
-
+                fileName.DataContext = globals;
+                graphInfo.DataContext = globals;
             }
         }
     }

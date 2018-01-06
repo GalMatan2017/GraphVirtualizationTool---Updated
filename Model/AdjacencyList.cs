@@ -22,7 +22,7 @@ namespace GraphVirtualizationTool.Model
             }
         }
 
-        public T ParseFile<T>(string filename)
+        public List<List<T>> ParseFile<T>(string filename)
         {
             try
             {
@@ -63,12 +63,12 @@ namespace GraphVirtualizationTool.Model
                     }
                 }
                 reader.Close();
-                return   (T)Convert.ChangeType(list, typeof(T));
+                return   (List<List<T>>)Convert.ChangeType(list, typeof(List<List<T>>));
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return (T)Convert.ChangeType(new List<List<int>>(), typeof(T));
+                return (List < List<T>>)Convert.ChangeType(new List<List<int>>(), typeof(List<List<T>>));
             }
         }
     }

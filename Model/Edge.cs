@@ -9,19 +9,16 @@ namespace GraphVirtualizationTool
             get { return 0; }
             set { }
         }
-
         public override double Y
         {
             get { return 0; }
             set { }
         }
-
         public override double Z
         {
             get { return 0; }
             set { }
         }
-
         private Node _start;
         public Node Start
         {
@@ -32,7 +29,6 @@ namespace GraphVirtualizationTool
                 OnPropertyChanged("Start");
             }
         }
-
         private Node _end;
         public Node End
         {
