@@ -70,10 +70,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Model\AdjacencyList.cs" />
     <Compile Include="Model\AdjacencyMatrix.cs" />
     <Compile Include="Model\Algorithms.cs" />

@@ -10,14 +10,15 @@ namespace GraphVirtualizationTool
     {
         Graph graph;
         GraphGlobalVariables globals;
-        Algorithms algorithms = new Algorithms();
+        Algorithms algorithms;
 
         public GraphController()
         {
             InitializeComponent();
             globals = GraphGlobalVariables.getInstance();
             algorithms = new Algorithms();
-
+            fileName.DataContext = globals;
+            graphInfo.DataContext = globals;
         }
 
         private void onOpenGraphFileClickButton(object sender, System.Windows.RoutedEventArgs e)
@@ -83,8 +84,6 @@ namespace GraphVirtualizationTool
                     }
                     GraphRealization.draw(graph.getGraph<int>());
                 }
-                fileName.DataContext = globals;
-                graphInfo.DataContext = globals;
             }
         }
     }
