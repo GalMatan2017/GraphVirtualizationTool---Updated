@@ -3,11 +3,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace GraphVirtualizationTool
 {
     public class MainViewModel: INotifyPropertyChanged
     {
+        #region Singleton
         private MainViewModel() {
             ShowNames = true;
         }
@@ -20,6 +22,8 @@ namespace GraphVirtualizationTool
                 }
                 return instance;
         }
+        #endregion
+
         #region Collections
         private ObservableCollection<Node> _nodes;
         public ObservableCollection<Node> Nodes
@@ -34,6 +38,7 @@ namespace GraphVirtualizationTool
                 }
             }
         }
+
         private ObservableCollection<Edge> _edges;
         public ObservableCollection<Edge> Edges
         {
@@ -47,6 +52,7 @@ namespace GraphVirtualizationTool
                 }
             }
         }
+
         private DiagramObject _selectedObject;
         public DiagramObject SelectedObject
         {
@@ -72,7 +78,8 @@ namespace GraphVirtualizationTool
             }
         }
         #endregion
-        #region Bool (Visibility) Options
+
+        #region Bool (Visibility) Names
         private bool _showNames;
         public bool ShowNames
         {
@@ -81,16 +88,11 @@ namespace GraphVirtualizationTool
             {
                 _showNames = value;
                 OnPropertyChanged("ShowNames");
+                
             }
         }
         #endregion
-        #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
+
         #region Scrolling support
         private int _canvasHeight = 100;
         public int CanvasHeight
@@ -111,6 +113,23 @@ namespace GraphVirtualizationTool
                 _canvasWidth = value;
                 OnPropertyChanged("CanvasWidth");
             }
+        }
+        #endregion
+
+        #region Canvas
+        private Canvas _mainCanvas;
+        public Canvas MainCanvas
+        {
+            get { return _mainCanvas; }
+            set { if (value != null) _mainCanvas = value; }
+        }
+        #endregion
+
+        #region INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

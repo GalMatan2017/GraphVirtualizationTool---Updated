@@ -82,12 +82,14 @@
                     </DataTrigger>
                 </DataTemplate.Triggers>
             </DataTemplate>
+
+
         </Grid.Resources>
         
         <!-- Here comes the components -->
         <local:GraphController VerticalAlignment="Center" Margin="10" Grid.Column="0"/>
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-        <ListBox  Grid.Column="2" SelectedItem="{Binding SelectedObject}" 
+        <ListBox x:Name="canvas_holder" Grid.Column="2" SelectedItem="{Binding SelectedObject}" 
                      PreviewMouseMove="ListBox_PreviewMouseMove"
                      PreviewMouseDown="ListBox_PreviewMouseDown">
             <ListBox.Template>
@@ -101,8 +103,8 @@
                 <StaticResource ResourceKey="Col"/>
             </ListBox.ItemsSource>
             <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Canvas IsItemsHost="True" Background="Red" Height="{Binding CanvasHeight}" Width="{Binding CanvasWidth}"/>
+                <ItemsPanelTemplate x:Name="canvas" >
+                    <Canvas Loaded="Canvas_Loaded" IsItemsHost="True" Background="Beige" Height="{Binding CanvasHeight}" Width="{Binding CanvasWidth}"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemContainerStyle>

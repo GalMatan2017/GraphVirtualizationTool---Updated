@@ -25,12 +25,12 @@ namespace GraphVirtualizationTool.Model
                     //split by comma
                     string[] items = line.Split(':', ',');
                     //split by whitespace
-                    int item = -1;
                     //convert to integers
                     List<int> convertedItems = new List<int>();
                     foreach (var integer in items)
                     {
-                        if (GraphGlobalVariables.getInstance().TryParseInt32(integer, ref item) == 1)
+                        int item;
+                        if (GraphGlobalVariables.getInstance().TryParseInt32(integer, out item) != -1)
                             convertedItems.Add(item);
                     }
                     ++rows;

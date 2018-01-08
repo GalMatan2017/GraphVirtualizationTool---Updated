@@ -48,6 +48,7 @@ namespace GraphVirtualizationTool
                 var edge = vm.SelectedObject as Edge;
                 if (edge.Start != null && node != edge.Start)
                     edge.End = node;
+
             }
         }
         private void ListBox_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -74,6 +75,12 @@ namespace GraphVirtualizationTool
             if (item == null)
                 return null;
             return item.DataContext as Node;
+        }
+
+        private void Canvas_Loaded(object sender, RoutedEventArgs e)
+        {
+            Canvas canvas = sender as Canvas;
+            MainViewModel.getInstance().MainCanvas = canvas;
         }
     }
 }

@@ -15,6 +15,7 @@ namespace GraphVirtualizationTool
                 OnPropertyChanged("Name");
             }
         }
+
         private bool _isNew;
         public bool IsNew
         {
@@ -28,11 +29,12 @@ namespace GraphVirtualizationTool
         public abstract double X { get; set; }
         public abstract double Y { get; set; }
         public abstract double Z { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
     }
 }

@@ -5,10 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d">
     <StackPanel>
-        <Button Style="{StaticResource RoundCorner}" Click="onOpenGraphFileClickButton" Height="100">
-            <TextBlock TextWrapping="Wrap" FontSize="20" ><Run Text="Insert Graph File"/></TextBlock>
+        <Button Style="{StaticResource RoundCorner}" Click="onOpenGraphFileClickButton"  Height="100" Content="Insert Graph File">
         </Button>
         <TextBlock Name="fileName" FontSize="15" Text="{Binding Filename}" HorizontalAlignment="Center" ></TextBlock>
         <TextBlock Name="graphInfo" FontSize="15" Text="{Binding GraphInfo}" HorizontalAlignment="Center" ></TextBlock>
+        <CheckBox x:Name = "showNamesBox" Content = "Show names" HorizontalAlignment = "Center" Checked = "HandleCheck" 
+         Unchecked = "HandleUnchecked" Width = "90"/>
+        <Button Content="Save" Width="50" Click="SaveGraph"></Button>
     </StackPanel>
 </UserControl>

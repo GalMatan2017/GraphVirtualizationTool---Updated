@@ -29,6 +29,7 @@ namespace GraphVirtualizationTool
                 OnPropertyChanged("Start");
             }
         }
+
         private Node _end;
         public Node End
         {

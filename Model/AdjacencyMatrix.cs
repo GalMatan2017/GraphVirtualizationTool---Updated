@@ -24,12 +24,12 @@ namespace GraphVirtualizationTool.Model
                 {
                     //split by whitespace
                     string[] items = line.Split(',');
-                    int item = -1;
                     //convert to integers
                     List<bool> convertedItems = new List<bool>();
                     foreach (var integer in items)
                     {
-                        if (GraphGlobalVariables.getInstance().TryParseInt32(integer, ref item) == 1 && (item == 0 || item == 1))
+                        int item;
+                        if (GraphGlobalVariables.getInstance().TryParseInt32(integer, out item) != -1 && (item == 0 || item == 1))
                             convertedItems.Add(item == 0 ? false : true);
                     }
                     ++rows;

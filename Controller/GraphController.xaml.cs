@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Controls;
 using GraphVirtualizationTool.Model;
+using System.Windows;
 
 namespace GraphVirtualizationTool
 {
@@ -31,6 +32,7 @@ namespace GraphVirtualizationTool
                 globals.Filepath = openFileDialog.FileName;
                 globals.Filename = Path.GetFileName(globals.Filepath);
 
+                #region File Open
                 StreamReader reader = File.OpenText(globals.Filepath);
                 string line;
                 if ((line = reader.ReadLine()) != null)
@@ -41,9 +43,11 @@ namespace GraphVirtualizationTool
                         type = GraphTypes.Dense;
                     reader.Close();
                 }
-
+                #endregion
+      
                 if (type == GraphTypes.Dense)
                 {
+                    #region Dense
                     graph = new DenseGraph();
                     AdjacencyMatrix am = new AdjacencyMatrix();
 
@@ -63,11 +67,13 @@ namespace GraphVirtualizationTool
                     {
                         graph.GraphInfo = "";
                     }
-                    GraphRealization.draw(graph.getGraph<bool>());
+                    GraphRealization.draw(graph.getGraph<bool>());  
+                    #endregion
                 }
 
                 else
                 {
+                    #region Sparse
                     graph = new SparseGraph();
                     AdjacencyList am = new AdjacencyList();
 
@@ -88,10 +94,32 @@ namespace GraphVirtualizationTool
                         graph.GraphInfo = "";
                     }
                     GraphRealization.draw(graph.getGraph<int>());
+                    #endregion
                 }
-                graphInfo.DataContext = graph;
 
+                graphInfo.DataContext = graph;
             }
+        }
+
+
+
+        private void HandleCheck(object sender, RoutedEventArgs e)
+        {
+            CheckBox cb = sender as CheckBox;
+            MainViewModel.getInstance().CanvasHeight = 300;
+            if (cb.Name == "showNamesBox") MainViewModel.getInstance().ShowNames = true;
+        }
+
+        private void HandleUnchecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox cb = sender as CheckBox;
+
+            if (cb.Name == "showNamesBox") MainViewModel.getInstance().ShowNames = false;
+        }
+
+        private void SaveGraph(object sender, RoutedEventArgs e)
+        {
+            GraphGlobalVariables.getInstance().ExportToPng(null, MainViewModel.getInstance().MainCanvas);
         }
     }
 }

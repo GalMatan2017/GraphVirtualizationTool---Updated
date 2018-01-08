@@ -43,10 +43,11 @@ namespace GraphVirtualizationTool.Model
                 OnPropertyChanged("GraphInfo");
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        public event PropertyChangedEventHandler PropertyChanged;
+
     }
 }
