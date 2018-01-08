@@ -8,20 +8,6 @@ namespace GraphVirtualizationTool.Model
 {
     class AdjacencyList : FileHandlerInterface
     {
-        public int TryParseInt32(string text, ref int value)
-        {
-            int tmp;
-            if (int.TryParse(text, out tmp))
-            {
-                value = tmp;
-                return 1;
-            }
-            else
-            {
-                return -1; // Leave "value" as it was
-            }
-        }
-
         public List<List<T>> ParseFile<T>(string filename)
         {
             try
@@ -44,7 +30,7 @@ namespace GraphVirtualizationTool.Model
                     List<int> convertedItems = new List<int>();
                     foreach (var integer in items)
                     {
-                        if (TryParseInt32(integer, ref item) == 1)
+                        if (GraphGlobalVariables.getInstance().TryParseInt32(integer, ref item) == 1)
                             convertedItems.Add(item);
                     }
                     ++rows;

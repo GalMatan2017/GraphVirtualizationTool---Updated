@@ -65,7 +65,7 @@ namespace GraphVirtualizationTool.Model
                             {
                                 Name = $"connector {new Random().Next(999)}",
                                 Start = nodes.Single(x => x.Name.Equals($"node {row+1}")),
-                                End = nodes.Single(x => x.Name.Equals($"node {col}"))
+                                End = nodes.Single(x => x.Name.Equals($"node {col+1}"))
                             });
                         }
                     }

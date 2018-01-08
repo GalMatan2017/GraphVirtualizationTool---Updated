@@ -1,43 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
 namespace GraphVirtualizationTool.Model
 {
-    class DenseGraph : Graph
+    class DenseGraph : Graph, INotifyPropertyChanged
     {
-        private List<List<bool>> _matrix;
-        private List<int> templist = new List<int>();
-        public string TypeName
+        private List<List<bool>> matrix;
+        public List<List<T>> getGraph<T>()
+        {
+            return (List<List<T>>)Convert.ChangeType(matrix, typeof(List<List<T>>));
+        }
+        public void setGraph<T>(T graph)
+        {
+            matrix = new List<List<bool>>();
+            matrix = (List<List<bool>>)Convert.ChangeType(graph, typeof(List<List<bool>>));
+        }
+        public List<int> getNeighbours(int node)
+        {
+            List<int> neighbours = new List<int>();
+            for(int i = 0; i < matrix.Count; i++)
+            {
+                if(matrix[node-1][i] == true)
+                    neighbours.Add(i+1);
+            }
+            return neighbours;
+        }
+        public GraphTypes GraphType { get; set; } = GraphTypes.Dense;
+        private string _graphinfo { get; set; }
+        public string GraphInfo
         {
             get
             {
-                throw new NotImplementedException();
+                return _graphinfo;
             }
-
             set
             {
-                throw new NotImplementedException();
+                if (value != null)
+                    _graphinfo = value;
+                OnPropertyChanged("GraphInfo");
             }
         }
-        public List<List<TValue>> getGraph<TValue>()
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
         {
-            return (List<List<TValue>>)Convert.ChangeType(_matrix, typeof(List<List<TValue>>));
-        }
-        public void setGraph<TValue>(TValue graph)
-        {
-            _matrix = new List<List<bool>>();
-            _matrix = (List<List<bool>>)Convert.ChangeType(graph, typeof(List<List<bool>>));
-        }
-        List<int> Graph.getNeighbours(int node)
-        {
-            for(int i = 0; i < _matrix.Count; i++)
-            {
-                if(_matrix[node-1][i] == true)
-                    templist.Add( i+1);
-            }
-            return templist;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

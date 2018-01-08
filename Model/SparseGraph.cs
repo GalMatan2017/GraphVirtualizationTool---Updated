@@ -1,37 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
 namespace GraphVirtualizationTool.Model
 {
-    class SparseGraph : Graph
+    class SparseGraph : Graph, INotifyPropertyChanged
     {
-        private List<List<int>> _list;
-        private List<int> templist = new List<int>();
-        public string TypeName
+        private List<List<int>> list;
+        public List<List<T>> getGraph<T>()
+        {
+            return (List<List<T>>)Convert.ChangeType(list, typeof(List<List<T>>));
+        }
+        public void setGraph<T>(T graph)
+        {
+            list = new List<List<int>>();
+            list = (List<List<int>>)Convert.ChangeType(graph, typeof(List<List<int>>));
+        }
+        public List<int> getNeighbours(int node)
+        { 
+            return list[node-1]; 
+        }
+        public GraphTypes GraphType { get; set; } = GraphTypes.Sparse;
+        private string _graphinfo { get; set; }
+        public string GraphInfo
         {
             get
             {
-                throw new NotImplementedException();
+                return _graphinfo;
             }
             set
             {
-                throw new NotImplementedException();
+                if (value != null)
+                    _graphinfo = value;
+                OnPropertyChanged("GraphInfo");
             }
         }
-        public List<List<TValue>> getGraph<TValue>()
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
         {
-            return (List<List<TValue>>)Convert.ChangeType(_list, typeof(List<List<TValue>>));
-        }
-        public void setGraph<TValue>(TValue graph)
-        {
-            _list = new List<List<int>>();
-            _list = (List<List<int>>)Convert.ChangeType(graph, typeof(List<List<int>>));
-        }
-        List<int> Graph.getNeighbours(int node)
-        { 
-                return _list[node-1]; 
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -10,7 +10,7 @@ namespace GraphVirtualizationTool.Model
         private int componentlistIndex = 0;
         private bool bipartiteflag;
         private bool isConnectedflag;
-        public bool isBipartite_util<T>(T Graph, int src, int nodes_size, int[] colorArr, GraphGlobalVariables.GraphTypes graphType, int[] componentlist)
+        public bool isBipartite_util<T>(T Graph, int src, int nodes_size, int[] colorArr, GraphTypes graphType, int[] componentlist)
         {
             // Create a queue (FIFO) of vertex numbers and enqueue source vertex
             // for BFS traversal
@@ -22,7 +22,7 @@ namespace GraphVirtualizationTool.Model
             // second color is assigned.
             switch (graphType)
             {
-                case (GraphGlobalVariables.GraphTypes.Dense):
+                case (GraphTypes.Dense):
                     {
                         List<List<bool>> dense_graph = (List<List<bool>>)Convert.ChangeType(Graph, typeof(List<List<bool>>));
                         // Assign first color to source
@@ -60,7 +60,7 @@ namespace GraphVirtualizationTool.Model
                         }
                         return true;
                     }
-                case (GraphGlobalVariables.GraphTypes.Sparse):
+                case (GraphTypes.Sparse):
                     {
                         List<List<int>> sparse_graph = (List<List<int>>)Convert.ChangeType(Graph, typeof(List<List<int>>));
                         // Assign first color to source
@@ -99,7 +99,7 @@ namespace GraphVirtualizationTool.Model
             }
         }
 
-        public bool isBipartite<T>(T G, int nodes_size, int[] colorArr, GraphGlobalVariables.GraphTypes graphType, int[] componentlist)//remove scr
+        public bool isBipartite<T>(T G, int nodes_size, int[] colorArr, GraphTypes graphType, int[] componentlist)//remove scr
         {
             bool[] discovered = new bool[nodes_size + 1];
             for (int i = 0; i < nodes_size; ++i)

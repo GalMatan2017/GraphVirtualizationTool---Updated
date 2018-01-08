@@ -107,6 +107,7 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
+                    <Setter Property="OverridesDefaultStyle" Value="True"/>
                     <Setter Property="Canvas.Left" Value="{Binding X}"/>
                     <Setter Property="Canvas.Top" Value="{Binding Y}"/>
                     <Setter Property="FocusVisualStyle" Value="{StaticResource EmptyFocusVisualStyle}"/>

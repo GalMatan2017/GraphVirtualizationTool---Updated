@@ -4,7 +4,6 @@ namespace GraphVirtualizationTool
 {
     public class GraphGlobalVariables : INotifyPropertyChanged
     {
-        public enum GraphTypes { Dense, Sparse }
         private GraphGlobalVariables() { }
 
         private static GraphGlobalVariables instance = null;
@@ -24,7 +23,6 @@ namespace GraphVirtualizationTool
             return instance;
         }
         private string _filename { get; set; }
-        private string _graphinfo { get; set; }
         public string Filepath { get; set; }
         public string Filename
         {
@@ -39,21 +37,18 @@ namespace GraphVirtualizationTool
                 OnPropertyChanged("Filename");
             }
         }
-        public GraphTypes GraphType { get; set; }
-
-        public string GraphInfo
+        public int TryParseInt32(string text, ref int value)
         {
-            get
+            int tmp;
+            if (int.TryParse(text, out tmp))
             {
-                return _graphinfo;
+                value = tmp;
+                return 1;
             }
-            set
+            else
             {
-                if (value != null)
-                    _graphinfo = value;
-                OnPropertyChanged("GraphInfo");
+                return -1; // Leave "value" as it was
             }
         }
-
     }
 }

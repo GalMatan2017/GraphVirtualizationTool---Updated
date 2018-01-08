@@ -91,7 +91,7 @@
     <Compile Include="Model\Graph.cs" />
     <Compile Include="Model\GraphGlobalVariables.cs" />
     <Compile Include="Model\GraphRealization.cs" />
-    <Compile Include="Model\LeftPanelViewModel.cs" />
+    <Compile Include="Model\GraphTypes.cs" />
     <Compile Include="Model\SparseGraph.cs" />
     <Compile Include="Model\MainViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">

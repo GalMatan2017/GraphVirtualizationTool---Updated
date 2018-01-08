@@ -11,6 +11,7 @@ namespace GraphVirtualizationTool
         Graph graph;
         GraphGlobalVariables globals;
         Algorithms algorithms;
+        GraphTypes type;
 
         public GraphController()
         {
@@ -18,7 +19,7 @@ namespace GraphVirtualizationTool
             globals = GraphGlobalVariables.getInstance();
             algorithms = new Algorithms();
             fileName.DataContext = globals;
-            graphInfo.DataContext = globals;
+            graphInfo.DataContext = null;
         }
 
         private void onOpenGraphFileClickButton(object sender, System.Windows.RoutedEventArgs e)
@@ -35,13 +36,13 @@ namespace GraphVirtualizationTool
                 if ((line = reader.ReadLine()) != null)
                 {
                     if (line.Contains(":"))
-                        globals.GraphType = GraphGlobalVariables.GraphTypes.Sparse;
+                        type = GraphTypes.Sparse;
                     else
-                        globals.GraphType = GraphGlobalVariables.GraphTypes.Dense;
+                        type = GraphTypes.Dense;
                     reader.Close();
                 }
 
-                if (globals.GraphType == GraphGlobalVariables.GraphTypes.Dense)
+                if (type == GraphTypes.Dense)
                 {
                     graph = new DenseGraph();
                     AdjacencyMatrix am = new AdjacencyMatrix();
@@ -49,16 +50,18 @@ namespace GraphVirtualizationTool
                     graph.setGraph(am.ParseFile<bool>(globals.Filepath));
 
                     int size = graph.getGraph<bool>().Count;
-                    int[] colorArr = new int[size]; // number of vertices to be "colored"
-                    int[] componentlist = new int[size];// number of vertices which each of vertex represented by the list index and the value is the component class number
+                    //number of vertices to be "colored"
+                    int[] colorArr = new int[size]; 
+                    //number of vertices which each of vertex represented by the list index and the value is the component class number
+                    int[] componentlist = new int[size];
 
-                    if (algorithms.isBipartite(graph.getGraph<bool>(), size, colorArr, GraphGlobalVariables.GraphTypes.Dense, componentlist))
+                    if (algorithms.isBipartite(graph.getGraph<bool>(), size, colorArr, GraphTypes.Dense, componentlist))
                     {
-                        globals.GraphInfo = "Bipartite!";
+                        graph.GraphInfo = "Bipartite!";
                     }
                     else
                     {
-                        globals.GraphInfo = "";
+                        graph.GraphInfo = "";
                     }
                     GraphRealization.draw(graph.getGraph<bool>());
                 }
@@ -71,19 +74,23 @@ namespace GraphVirtualizationTool
                     graph.setGraph(am.ParseFile<int>(globals.Filepath));
 
                     int size = graph.getGraph<int>().Count;
-                    int[] colorArr = new int[size]; // number of vertices to be "colored"
-                    int[] componentlist = new int[size];// number of vertices which each of vertex represented by the list index and the value is the component class number
+                    //number of vertices to be colored
+                    int[] colorArr = new int[size]; 
+                    //number of vertices which each of vertex represented by the list index and the value is the component class number
+                    int[] componentlist = new int[size];
 
-                    if (algorithms.isBipartite(graph.getGraph<int>(), size, colorArr, GraphGlobalVariables.GraphTypes.Sparse, componentlist))
+                    if (algorithms.isBipartite(graph.getGraph<int>(), size, colorArr, GraphTypes.Sparse, componentlist))
                     {
-                        globals.GraphInfo = "Bipartite!";
+                        graph.GraphInfo = "Bipartite!";
                     }
                     else
                     {
-                        globals.GraphInfo = "";
+                        graph.GraphInfo = "";
                     }
                     GraphRealization.draw(graph.getGraph<int>());
                 }
+                graphInfo.DataContext = graph;
+
             }
         }
     }
