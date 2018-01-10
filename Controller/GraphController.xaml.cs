@@ -18,13 +18,13 @@ namespace GraphVirtualizationTool
         {
             InitializeComponent();
             globals = GraphGlobalVariables.getInstance();
-            algorithms = new Algorithms();
             fileName.DataContext = globals;
             graphInfo.DataContext = null;
         }
 
         private void onOpenGraphFileClickButton(object sender, System.Windows.RoutedEventArgs e)
         {
+            algorithms = new Algorithms();
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
             openFileDialog.Filter = "Text files (*.txt)|*.txt";
             if (openFileDialog.ShowDialog() == true)
@@ -51,23 +51,20 @@ namespace GraphVirtualizationTool
                     graph = new DenseGraph();
                     AdjacencyMatrix am = new AdjacencyMatrix();
 
-                    graph.setGraph(am.ParseFile<bool>(globals.Filepath));
+                    graph.setData(am.ParseFile<bool>(globals.Filepath));
 
-                    int size = graph.getGraph<bool>().Count;
+                    int size = graph.getData<bool>().Count;
                     //number of vertices to be "colored"
                     int[] colorArr = new int[size]; 
                     //number of vertices which each of vertex represented by the list index and the value is the component class number
-                    int[] componentlist = new int[size];
+                    int[] conn_comps = new int[size];
 
-                    if (algorithms.isBipartite(graph.getGraph<bool>(), size, colorArr, GraphTypes.Dense, componentlist))
+                    if (algorithms.isBipartite<bool>(graph, size, colorArr, GraphTypes.Dense, conn_comps))
                     {
-                        graph.GraphInfo = "Bipartite!";
+                        graph.IsBipartite = true;
                     }
-                    else
-                    {
-                        graph.GraphInfo = "";
-                    }
-                    GraphRealization.draw(graph.getGraph<bool>());  
+
+                    GraphRealization.draw<bool>(graph,colorArr,conn_comps);  
                     #endregion
                 }
 
@@ -77,46 +74,37 @@ namespace GraphVirtualizationTool
                     graph = new SparseGraph();
                     AdjacencyList am = new AdjacencyList();
 
-                    graph.setGraph(am.ParseFile<int>(globals.Filepath));
+                    graph.setData(am.ParseFile<int>(globals.Filepath));
 
-                    int size = graph.getGraph<int>().Count;
+                    int size = graph.getData<int>().Count;
                     //number of vertices to be colored
                     int[] colorArr = new int[size]; 
                     //number of vertices which each of vertex represented by the list index and the value is the component class number
-                    int[] componentlist = new int[size];
+                    int[] conn_comps = new int[size];
 
-                    if (algorithms.isBipartite(graph.getGraph<int>(), size, colorArr, GraphTypes.Sparse, componentlist))
+                    if (algorithms.isBipartite<int>(graph, size, colorArr, GraphTypes.Sparse, conn_comps))
                     {
-                        graph.GraphInfo = "Bipartite!";
+                        graph.IsBipartite = true;
                     }
-                    else
-                    {
-                        graph.GraphInfo = "";
-                    }
-                    GraphRealization.draw(graph.getGraph<int>());
+
+                    GraphRealization.draw<int>(graph, colorArr, conn_comps);
                     #endregion
                 }
-
                 graphInfo.DataContext = graph;
             }
         }
-
-
-
         private void HandleCheck(object sender, RoutedEventArgs e)
         {
             CheckBox cb = sender as CheckBox;
             MainViewModel.getInstance().CanvasHeight = 300;
             if (cb.Name == "showNamesBox") MainViewModel.getInstance().ShowNames = true;
         }
-
         private void HandleUnchecked(object sender, RoutedEventArgs e)
         {
             CheckBox cb = sender as CheckBox;
 
             if (cb.Name == "showNamesBox") MainViewModel.getInstance().ShowNames = false;
         }
-
         private void SaveGraph(object sender, RoutedEventArgs e)
         {
             GraphGlobalVariables.getInstance().ExportToPng(null, MainViewModel.getInstance().MainCanvas);

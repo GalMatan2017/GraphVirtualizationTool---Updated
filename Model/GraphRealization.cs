@@ -2,64 +2,108 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
+using System.Windows.Media;
 
 namespace GraphVirtualizationTool.Model
 {
     class GraphRealization
     {
-        class Point
-        {
-            private int x, y;
-            public int X
-            {
-                get { return x; }
-                set { x = value; ; }
-            }
-            public int Y
-            {
-                get { return y; }
-                set { y = value; ; }
-            }
-        }
-        public static void seedCoords(int nodes_count, int conn_comps, bool isBip)
-        {
-            int height = MainViewModel.getInstance().CanvasHeight;
-            int width = MainViewModel.getInstance().CanvasWidth;
-            int node_siz = Node.nodeSize;
-            if (isBip)
-            {
 
-            }
-
-
-
-        }
-        List<Point> seed;
-        public static Tuple<IEnumerable<Node>, IEnumerable<Edge>> draw<T>(List<List<T>> graph)
+        public static Tuple<IEnumerable<Node>, IEnumerable<Edge>> draw<T>(Graph graph,int[] colorArr,int[] conn_comps)
         {
             List<Node> nodes = new List<Node>();
             List<Edge> edges = new List<Edge>();
             Random random = new Random();
-            int rows = graph.Count;
-            seedCoords(rows, 3, false);
+            int rows = graph.getData<T>().Count;
+
+            int comps = 0;
+            int total_nodes = graph.getData<T>().Count;
+
+            int marginX = 50, marginY = 50;
+
+            List<Point> coordinates = new List<Point>();
+
+            foreach (var comp in conn_comps)
+            {
+                if (comp > comps)
+                    comps = comp;
+            }
+
+            double[] normalized = new double[comps];
+
+            foreach (var comp in conn_comps)
+            {
+                ++normalized[comp - 1];
+            }
+
+            for (int i = 0; i < comps; i++)
+            {
+                normalized[i] /= total_nodes;
+            }
+
+            if (graph.IsBipartite)
+            {
+                int[] comps_zeros = new int[comps];
+                int[] comps_oness = new int[comps];
+                int maxValue = -1;
+                int[] yFactor = new int[comps*2];
+
+                for (int i = 0; i < total_nodes; i++)
+                {
+                    if (colorArr[i] == 0)
+                        ++comps_zeros[conn_comps[i] - 1];
+                    else
+                        ++comps_oness[conn_comps[i] - 1];
+                }
+
+                for (int i = 0; i < comps; i++)
+                    if (comps_zeros[i] > maxValue)
+                        maxValue = comps_zeros[i];
+
+                for (int i = 0; i < comps; i++)
+                    if (comps_oness[i] > maxValue)
+                        maxValue = comps_oness[i];
+
+                for (int i = 0; i < total_nodes; i++)
+                {
+                    coordinates.Add(new Point(2*conn_comps[i] * marginX - colorArr[i] * marginX,yFactor[2 * conn_comps[i] - colorArr[i] - 1]));
+                    yFactor[2 * conn_comps[i] - colorArr[i] - 1] += marginY;
+                }
+
+            }
+
+            else
+            {
+
+            }
             //Matrix case
             if (typeof(T) == typeof(bool))
             {
                 for (int row = 0; row < rows; row++)
+                {
+                    SolidColorBrush color;
+                    if (colorArr[row] == 0)
+                        color = new SolidColorBrush(Colors.Blue);
+                    else
+                        color = new SolidColorBrush(Colors.Orange);
                     nodes.Add(
                         new Node()
                         {
-                            Name = $"node {row+1}",
-                            X = random.Next(50, 500),
-                            Y = random.Next(50, 500)
+                            Name = $"node {row + 1}",
+                            X = coordinates[row].X,
+                            Y = coordinates[row].Y,
+                            NodeColor = (color)
                         });
-                for (int row = 0; row < graph.Count; row++)
+                }
+
+                for (int row = 0; row < graph.getData<T>().Count; row++)
                 {
-                    for (int col = graph.Count - 1; col > row - 1; col--)
+                    for (int col = graph.getData<T>().Count - 1; col > row - 1; col--)
                     {
                         if (col == row)
                             continue;
-                        if ((bool)Convert.ChangeType(graph.ElementAt(row).ElementAt(col),typeof(bool)) == true)
+                        if ((bool)Convert.ChangeType(graph.getData<T>().ElementAt(row).ElementAt(col),typeof(bool)) == true)
                         {
                             edges.Add(new Edge()
                             {
@@ -75,27 +119,36 @@ namespace GraphVirtualizationTool.Model
             else
             {
                 for (int row = 0; row < rows; row++)
+                {
+
+                    SolidColorBrush color;
+                    if (colorArr[row] == 0)
+                        color = new SolidColorBrush(Colors.Blue);
+                    else
+                        color = new SolidColorBrush(Colors.Orange);
                     nodes.Add(
                         new Node()
                         {
-                            Name = $"node {graph.ElementAt(row).ElementAt(0)}",
-                            X = random.Next(50, 500),
-                            Y = random.Next(50, 500)
+                            Name = $"node {graph.getData<T>().ElementAt(row).ElementAt(0)}",
+                            X = coordinates[row].X,
+                            Y = coordinates[row].Y,
+                            NodeColor = (color)
                         });
-                for (int row = 0; row < graph.Count; row++)
+                }
+                for (int row = 0; row < graph.getData<T>().Count; row++)
                 {
-                    for (int col = 1; col < graph.ElementAt(row).Count; col++)
+                    for (int col = 1; col < graph.getData<T>().ElementAt(row).Count; col++)
                     {
-                        if (edges.Find(x => x.Start.Name.Equals($"node {graph.ElementAt(row).ElementAt(col)}")
-                                            && x.End.Name.Equals(($"node {graph.ElementAt(row).ElementAt(0)}"))) != null)
+                        if (edges.Find(x => x.Start.Name.Equals($"node {graph.getData<T>().ElementAt(row).ElementAt(col)}")
+                                            && x.End.Name.Equals(($"node {graph.getData<T>().ElementAt(row).ElementAt(0)}"))) != null)
                             continue;
                         else
                         {
                             edges.Add(new Edge()
                             {
                                 Name = $"edge {new Random().Next(999)}",
-                                Start = nodes.Single(x => x.Name.Equals($"node {graph.ElementAt(row).ElementAt(0)}")),
-                                End = nodes.Single(x => x.Name.Equals($"node {graph.ElementAt(row).ElementAt(col)}"))
+                                Start = nodes.Single(x => x.Name.Equals($"node {graph.getData<T>().ElementAt(row).ElementAt(0)}")),
+                                End = nodes.Single(x => x.Name.Equals($"node {graph.getData<T>().ElementAt(row).ElementAt(col)}"))
                             });
                         }
                     }

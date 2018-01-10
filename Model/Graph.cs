@@ -6,8 +6,9 @@ namespace GraphVirtualizationTool.Model
     {
         GraphTypes GraphType { get; set; }
         string GraphInfo { get; set; }
-        List<List<T>> getGraph<T>();
-        void setGraph<T>(T graph);
+        List<List<T>> getData<T>();
+        void setData<T>(T data);
         List<int> getNeighbours(int node);
+        bool IsBipartite { get; set; }
     }
 }

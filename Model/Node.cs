@@ -1,4 +1,6 @@
 using System;
+using System.Windows.Media;
+
 namespace GraphVirtualizationTool
 {
     public class Node : DiagramObject
@@ -58,17 +60,28 @@ namespace GraphVirtualizationTool
             }
         }
         //Node ellipse resizing
-        public static int nodeSize = 30;
+        public static int _nodeSize = 30;
         public int NodeSize
         {
-            get { return nodeSize; }
+            get { return _nodeSize; }
             set
             {
                 if (value > 0)
                 {
-                    nodeSize = value;
+                    _nodeSize = value;
                     OnPropertyChanged("NodeSize");
                 }
+            }
+        }
+
+        private Brush _nodeColor = new SolidColorBrush(Colors.Honeydew);
+        public Brush NodeColor
+        {
+            get { return _nodeColor; }
+            set
+            {
+                _nodeColor = value;
+                OnPropertyChanged("color");
             }
         }
     }

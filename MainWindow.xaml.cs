@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Controls;
-using System.Diagnostics;
 using System.Windows.Input;
 
 namespace GraphVirtualizationTool
@@ -14,6 +11,8 @@ namespace GraphVirtualizationTool
         {
             InitializeComponent();
             DataContext = MainViewModel.getInstance();
+            SizeToContent = SizeToContent.WidthAndHeight;
+
         }
         private void Thumb_Drag(object sender, DragDeltaEventArgs e)
         {
@@ -26,7 +25,7 @@ namespace GraphVirtualizationTool
             node.X += e.HorizontalChange;
             node.Y += e.VerticalChange;
         }
-        private void ListBox_PreviewMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        private void ListBox_PreviewMouseMove(object sender, MouseEventArgs e)
         {
             var listbox = sender as ListBox;
 
@@ -51,7 +50,7 @@ namespace GraphVirtualizationTool
 
             }
         }
-        private void ListBox_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void ListBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             var vm = DataContext as MainViewModel;
             if (vm != null)

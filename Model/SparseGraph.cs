@@ -8,19 +8,19 @@ namespace GraphVirtualizationTool.Model
 {
     class SparseGraph : Graph, INotifyPropertyChanged
     {
-        private List<List<int>> list;
-        public List<List<T>> getGraph<T>()
+        private List<List<int>> data;
+        public List<List<T>> getData<T>()
         {
-            return (List<List<T>>)Convert.ChangeType(list, typeof(List<List<T>>));
+            return (List<List<T>>)Convert.ChangeType(data, typeof(List<List<T>>));
         }
-        public void setGraph<T>(T graph)
+        public void setData<T>(T data)
         {
-            list = new List<List<int>>();
-            list = (List<List<int>>)Convert.ChangeType(graph, typeof(List<List<int>>));
+            this.data = new List<List<int>>();
+            this.data = (List<List<int>>)Convert.ChangeType(data, typeof(List<List<int>>));
         }
         public List<int> getNeighbours(int node)
         { 
-            return list[node-1]; 
+            return data[node-1]; 
         }
         public GraphTypes GraphType { get; set; } = GraphTypes.Sparse;
         private string _graphinfo { get; set; }
@@ -35,6 +35,23 @@ namespace GraphVirtualizationTool.Model
                 if (value != null)
                     _graphinfo = value;
                 OnPropertyChanged("GraphInfo");
+            }
+        }
+        private bool _isBipartite { get; set; } = false;
+        public bool IsBipartite
+        {
+            get
+            {
+                return _isBipartite;
+            }
+            set
+            {
+                _isBipartite = value;
+                if (value == true)
+                    GraphInfo = "A bipartite graph";
+                else
+                    GraphInfo = "A non-bipartite graph";
+                OnPropertyChanged("IsBipartite");
             }
         }
         protected virtual void OnPropertyChanged(string propertyName)

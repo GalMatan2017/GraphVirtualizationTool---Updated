@@ -24,7 +24,7 @@
                     <Thumb.Template>
                         <ControlTemplate TargetType="Thumb">
                             <Canvas Margin="-10,-10,10,10">
-                                <Ellipse Height="{Binding NodeSize}" Width="{Binding NodeSize}" Stroke="Black" StrokeThickness="1" Fill="Azure"
+                                <Ellipse Height="{Binding NodeSize}" Width="{Binding NodeSize}" Stroke="Black" StrokeThickness="1" Fill="{Binding NodeColor}"
                                              x:Name="Ellipse">
                                 </Ellipse>
                                 <TextBlock Canvas.Top="-20" Canvas.Left="-40" Width="100" 
@@ -35,7 +35,7 @@
                             </Canvas>
                             <ControlTemplate.Triggers>
                                 <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" Value="True">
-                                    <Setter TargetName="Ellipse" Property="Fill" Value="Red"/>
+                                    <Setter TargetName="Ellipse" Property="Fill" Value="Yellow"/>
                                 </DataTrigger>
                                 <Trigger Property="IsDragging" Value="True">
                                     <Setter TargetName="Ellipse" Property="Fill" Value="Green"/>
@@ -82,14 +82,12 @@
                     </DataTrigger>
                 </DataTemplate.Triggers>
             </DataTemplate>
-
-
         </Grid.Resources>
         
         <!-- Here comes the components -->
         <local:GraphController VerticalAlignment="Center" Margin="10" Grid.Column="0"/>
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-        <ListBox x:Name="canvas_holder" Grid.Column="2" SelectedItem="{Binding SelectedObject}" 
+        <ListBox x:Name="canvas_holder" Grid.Column="2" SelectedItem="{Binding SelectedObject}"
                      PreviewMouseMove="ListBox_PreviewMouseMove"
                      PreviewMouseDown="ListBox_PreviewMouseDown">
             <ListBox.Template>
@@ -121,14 +119,14 @@
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter TargetName="Content" Property="Effect">
                                             <Setter.Value>
-                                                <DropShadowEffect Color="Blue"  ShadowDepth="0" BlurRadius="5"/>
+                                                <DropShadowEffect Color="Black" ShadowDepth="0" BlurRadius="25"/>
                                                 <!--controls the node's shadow-->
                                             </Setter.Value>
                                         </Setter>
                                     </Trigger>
-                                    <DataTrigger Binding="{Binding IsNew}" Value="True">
+                                    <!--<DataTrigger Binding="{Binding IsNew}" Value="True">
                                         <Setter Property="Opacity" Value=".5"/>
-                                    </DataTrigger>
+                                    </DataTrigger>-->
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>

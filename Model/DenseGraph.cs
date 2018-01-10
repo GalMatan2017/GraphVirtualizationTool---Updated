@@ -8,22 +8,22 @@ namespace GraphVirtualizationTool.Model
 {
     class DenseGraph : Graph, INotifyPropertyChanged
     {
-        private List<List<bool>> matrix;
-        public List<List<T>> getGraph<T>()
+        private List<List<bool>> data;
+        public List<List<T>> getData<T>()
         {
-            return (List<List<T>>)Convert.ChangeType(matrix, typeof(List<List<T>>));
+            return (List<List<T>>)Convert.ChangeType(data, typeof(List<List<T>>));
         }
-        public void setGraph<T>(T graph)
+        public void setData<T>(T data)
         {
-            matrix = new List<List<bool>>();
-            matrix = (List<List<bool>>)Convert.ChangeType(graph, typeof(List<List<bool>>));
+            this.data = new List<List<bool>>();
+            this.data = (List<List<bool>>)Convert.ChangeType(data, typeof(List<List<bool>>));
         }
         public List<int> getNeighbours(int node)
         {
             List<int> neighbours = new List<int>();
-            for(int i = 0; i < matrix.Count; i++)
+            for(int i = 0; i < data.Count; i++)
             {
-                if(matrix[node-1][i] == true)
+                if(data[node-1][i] == true)
                     neighbours.Add(i+1);
             }
             return neighbours;
@@ -41,6 +41,23 @@ namespace GraphVirtualizationTool.Model
                 if (value != null)
                     _graphinfo = value;
                 OnPropertyChanged("GraphInfo");
+            }
+        }
+        private bool _isBipartite { get; set; } = false;
+        public bool IsBipartite
+        {
+            get
+            {
+                return _isBipartite;
+            }
+            set
+            {
+                _isBipartite = value;
+                if (value == true)
+                    GraphInfo = "A bipartite graph";
+                else
+                    GraphInfo = "A non-bipartite graph";
+                OnPropertyChanged("IsBipartite");
             }
         }
         protected virtual void OnPropertyChanged(string propertyName)

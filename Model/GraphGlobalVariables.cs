@@ -56,7 +56,7 @@ namespace GraphVirtualizationTool
         public void ExportToPng(Uri path, Canvas surface)
         {
             System.IO.Directory.CreateDirectory("C:/GraphVirtualizationSaves/");
-            path = new Uri($"C:/GraphVirtualizationSaves/{DateTime.Now.ToString("MM-d-Y")}.bmp");
+            path = new Uri($"C:/GraphVirtualizationSaves/{DateTime.Now.ToString("dd-MM-yy")}.bmp");
             if (path == null) return;
             DirectoryInfo dInfo = new DirectoryInfo("C:/GraphVirtualizationSaves");
             DirectorySecurity dSecurity = dInfo.GetAccessControl();

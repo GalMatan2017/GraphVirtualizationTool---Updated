@@ -9,7 +9,7 @@
         </Button>
         <TextBlock Name="fileName" FontSize="15" Text="{Binding Filename}" HorizontalAlignment="Center" ></TextBlock>
         <TextBlock Name="graphInfo" FontSize="15" Text="{Binding GraphInfo}" HorizontalAlignment="Center" ></TextBlock>
-        <CheckBox x:Name = "showNamesBox" Content = "Show names" HorizontalAlignment = "Center" Checked = "HandleCheck" 
+        <CheckBox x:Name = "showNamesBox" Content = "Show names" HorizontalAlignment = "Center" Checked = "HandleCheck" IsChecked="True"
          Unchecked = "HandleUnchecked" Width = "90"/>
         <Button Content="Save" Width="50" Click="SaveGraph"></Button>
     </StackPanel>
