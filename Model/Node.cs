@@ -74,7 +74,7 @@ namespace GraphVirtualizationTool
             }
         }
 
-        private Brush _nodeColor = new SolidColorBrush(Colors.Honeydew);
+        private Brush _nodeColor;
         public Brush NodeColor
         {
             get { return _nodeColor; }

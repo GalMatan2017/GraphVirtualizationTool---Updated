@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Security.AccessControl;
@@ -53,12 +54,24 @@ namespace GraphVirtualizationTool
         }
 
 
-        public void ExportToPng(Uri path, Canvas surface)
+        public void ExportToPng(Canvas surface)
         {
-            System.IO.Directory.CreateDirectory("C:/GraphVirtualizationSaves/");
-            path = new Uri($"C:/GraphVirtualizationSaves/{DateTime.Now.ToString("dd-MM-yy")}.bmp");
-            if (path == null) return;
-            DirectoryInfo dInfo = new DirectoryInfo("C:/GraphVirtualizationSaves");
+            string dir;
+            string filename = $"{DateTime.Now.ToString("dd-MM-yyyy_HH-mm-ss")}.bmp";
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                dir = dialog.FileName;
+            }
+            else
+            {
+                return;
+            }
+            // System.IO.Directory.CreateDirectory("C:/GraphVirtualizationSaves/");
+            Uri path;
+            path = new Uri($"{dir}/{filename}");
+            DirectoryInfo dInfo = new DirectoryInfo(dir);
             DirectorySecurity dSecurity = dInfo.GetAccessControl();
             dSecurity.AddAccessRule(new FileSystemAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null), FileSystemRights.FullControl, InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit, PropagationFlags.NoPropagateInherit, AccessControlType.Allow));
             dInfo.SetAccessControl(dSecurity);
@@ -90,6 +103,8 @@ namespace GraphVirtualizationTool
                 encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
                 // save the data to the stream
                 encoder.Save(outStream);
+
+                MessageBox.Show($"File: {filename}\nSuccessfully saved to:\nDirectory: {dir}");
             }
         }
         protected virtual void OnPropertyChanged(string propertyName)
