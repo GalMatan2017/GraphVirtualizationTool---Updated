@@ -17,6 +17,8 @@ namespace GraphVirtualizationTool.Model
             Random random = new Random();
             int rows = graph.getData<T>().Count;
 
+
+            int startY = 50;
             int comps = 0;
             int total_nodes = graph.getData<T>().Count;
 
@@ -43,16 +45,21 @@ namespace GraphVirtualizationTool.Model
             if (graph.IsBipartite)
             {
                 int[] comps_zeros = new int[comps];
-                int[] comps_oness = new int[comps];
+                int[] comps_ones = new int[comps];
                 int maxValue = -1;
                 int[] yFactor = new int[comps*2];
+
+                for (int i = 0; i < comps * 2; i++)
+                {
+                    yFactor[i] = startY;
+                }
 
                 for (int i = 0; i < total_nodes; i++)
                 {
                     if (colorArr[i] == 0)
                         ++comps_zeros[conn_comps[i] - 1];
                     else
-                        ++comps_oness[conn_comps[i] - 1];
+                        ++comps_ones[conn_comps[i] - 1];
                 }
 
                 for (int i = 0; i < comps; i++)
@@ -60,8 +67,8 @@ namespace GraphVirtualizationTool.Model
                         maxValue = comps_zeros[i];
 
                 for (int i = 0; i < comps; i++)
-                    if (comps_oness[i] > maxValue)
-                        maxValue = comps_oness[i];
+                    if (comps_ones[i] > maxValue)
+                        maxValue = comps_ones[i];
 
                 for (int i = 0; i < total_nodes; i++)
                 {
@@ -69,8 +76,8 @@ namespace GraphVirtualizationTool.Model
                     yFactor[2 * conn_comps[i] - colorArr[i] - 1] += marginY;
                 }
 
-                MainViewModel.getInstance().CanvasHeight = (maxValue - 1) * marginY + maxValue * Node._nodeSize;
-                MainViewModel.getInstance().CanvasWidth = marginX * (2 * comps - 1) + (2 * comps) * Node._nodeSize;
+                MainViewModel.getInstance().CanvasHeight = (maxValue * Node._nodeSize) + (marginY * (maxValue-1));
+                MainViewModel.getInstance().CanvasWidth = (comps*2 * Node._nodeSize) + (marginX * (comps*2));
             }
 
             else

@@ -63,14 +63,5 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style TargetType="Control" x:Key="EmptyFocusVisualStyle">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate>
-
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </Application.Resources>
 </Application>

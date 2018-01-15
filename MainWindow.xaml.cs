@@ -11,7 +11,7 @@ namespace GraphVirtualizationTool
         {
             InitializeComponent();
             DataContext = MainViewModel.getInstance();
-            SizeToContent = SizeToContent.WidthAndHeight;
+          //  SizeToContent = SizeToContent.WidthAndHeight;
 
         }
         private void Thumb_Drag(object sender, DragDeltaEventArgs e)

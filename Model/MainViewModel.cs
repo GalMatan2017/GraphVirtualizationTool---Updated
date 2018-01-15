@@ -88,13 +88,12 @@ namespace GraphVirtualizationTool
             {
                 _showNames = value;
                 OnPropertyChanged("ShowNames");
-                
             }
         }
         #endregion
 
         #region Scrolling support
-        private int _canvasHeight = 300;
+        private int _canvasHeight;
         public int CanvasHeight
         {
             get { return _canvasHeight; }
@@ -104,7 +103,7 @@ namespace GraphVirtualizationTool
                 OnPropertyChanged("CanvasHeight");
             }
         }
-        private int _canvasWidth = 300;
+        private int _canvasWidth;
         public int CanvasWidth
         {
             get { return _canvasWidth; }

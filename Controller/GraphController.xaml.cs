@@ -13,8 +13,10 @@ namespace GraphVirtualizationTool
         GraphGlobalVariables globals;
         Algorithms algorithms;
         GraphTypes type;
-        const int DEFAULT_SPACING = 50;
+        
         const int DEFAULT_NODE_SIZE = 30;
+        const int DEFAULT_SPACING = DEFAULT_NODE_SIZE * 2;
+        int spacing = DEFAULT_SPACING;
         int[] color_array;
         int[] connected_comps;
 
@@ -69,7 +71,7 @@ namespace GraphVirtualizationTool
                         graph.IsBipartite = true;
                     }
 
-                    GraphRealization.draw<bool>(graph, color_array, connected_comps,DEFAULT_SPACING,DEFAULT_SPACING);  
+                    GraphRealization.draw<bool>(graph, color_array, connected_comps,spacing, spacing);  
                     #endregion
                 }
 
@@ -92,7 +94,7 @@ namespace GraphVirtualizationTool
                         graph.IsBipartite = true;
                     }
 
-                    GraphRealization.draw<int>(graph, color_array, connected_comps,DEFAULT_SPACING,DEFAULT_SPACING);
+                    GraphRealization.draw<int>(graph, color_array, connected_comps, spacing, spacing);
                     #endregion
                 }
                 graphInfo.DataContext = graph;
@@ -123,22 +125,18 @@ namespace GraphVirtualizationTool
         {
             if (graph != null) {
             if (graph.GraphType == GraphTypes.Dense)
-                GraphRealization.draw<bool>(graph, color_array, connected_comps, DEFAULT_SPACING * (int)spaceX.Value, DEFAULT_SPACING * (int)spaceY.Value);
+                GraphRealization.draw<bool>(graph, color_array, connected_comps, spacing * (int)spaceX.Value, spacing * (int)spaceY.Value);
             else
-                GraphRealization.draw<int>(graph, color_array, connected_comps, DEFAULT_SPACING * (int)spaceX.Value, DEFAULT_SPACING * (int)spaceY.Value);
+                GraphRealization.draw<int>(graph, color_array, connected_comps, spacing * (int)spaceX.Value, spacing * (int)spaceY.Value);
             }
 
         }
-
-        private void nodeSz_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            foreach (var node in MainViewModel.getInstance().Nodes)
-                node.NodeSize = (int)nodeSz.Value * DEFAULT_NODE_SIZE;
-        }
-
         private void zoom_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            spaceX.Value = spaceY.Value =  nodeSz.Value = zoom.Value;
+            foreach (var node in MainViewModel.getInstance().Nodes)
+                node.NodeSize = DEFAULT_NODE_SIZE * (int)zoom.Value;
+            spacing = DEFAULT_SPACING * (int)zoom.Value;
+            space_ValueChanged(sender, e);
         }
     }
 }

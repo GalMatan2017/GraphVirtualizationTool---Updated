@@ -52,8 +52,6 @@ namespace GraphVirtualizationTool
                 return value;
             }
         }
-
-
         public void ExportToPng(Canvas surface)
         {
             string dir;
@@ -71,10 +69,6 @@ namespace GraphVirtualizationTool
             // System.IO.Directory.CreateDirectory("C:/GraphVirtualizationSaves/");
             Uri path;
             path = new Uri($"{dir}/{filename}");
-            DirectoryInfo dInfo = new DirectoryInfo(dir);
-            DirectorySecurity dSecurity = dInfo.GetAccessControl();
-            dSecurity.AddAccessRule(new FileSystemAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null), FileSystemRights.FullControl, InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit, PropagationFlags.NoPropagateInherit, AccessControlType.Allow));
-            dInfo.SetAccessControl(dSecurity);
             // Get the size of canvas
             Size size = new Size(surface.Width, surface.Height);
             // Measure and arrange the surface
