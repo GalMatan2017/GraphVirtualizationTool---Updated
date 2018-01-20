@@ -14,7 +14,7 @@ namespace GraphVirtualizationTool
         Algorithms algorithms;
         GraphTypes type;
         
-        const int DEFAULT_NODE_SIZE = 30;
+        const int DEFAULT_NODE_SIZE = 20;
         const int DEFAULT_SPACING = DEFAULT_NODE_SIZE * 2;
         int spacing = DEFAULT_SPACING;
         int[] color_array;
@@ -134,8 +134,13 @@ namespace GraphVirtualizationTool
         private void zoom_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             foreach (var node in MainViewModel.getInstance().Nodes)
-                node.NodeSize = DEFAULT_NODE_SIZE * (int)zoom.Value;
-            spacing = DEFAULT_SPACING * (int)zoom.Value;
+            {
+                if ((int) zoom.Value <3)
+                    node.NodeSize = DEFAULT_NODE_SIZE * ((int)zoom.Value -3);
+                node.NodeSize = DEFAULT_NODE_SIZE * ((int) zoom.Value-2);
+            }
+
+            spacing = DEFAULT_SPACING * (int)zoom.Value-2;
             space_ValueChanged(sender, e);
         }
     }
